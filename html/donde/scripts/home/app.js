@@ -1,7 +1,7 @@
 
-var dondev2App = angular.module('dondev2App',['720kb.socialshare','ngMap','ngRoute','ui.materialize','angucomplete','vcRecaptcha','ngTextTruncate']).
+var dondev2App = angular.module('dondev2App',['720kb.socialshare','ngMap','ngRoute','ui.materialize','angucomplete','vcRecaptcha','ngTextTruncate','l10n'])
 
-config(['$routeProvider', function($routeProvider) {
+.config(['$routeProvider', function($routeProvider) {
   $routeProvider
   .when('/', {
       templateUrl: 'scripts/home/controllers/home/view.html',
@@ -67,7 +67,48 @@ config(['$routeProvider', function($routeProvider) {
     });
 
 
+}])
+.config( ['l10nProvider', function(l10n) {
+     //settingUp localstorage varibale
+  try {
+    
+    if (typeof(typeof(localStorage.getItem("lang"))) !== "undefined") { 
+      l10n.setLocale(localStorage.getItem("lang"));
+    }
+    else{
+      var userLang = navigator.language || navigator.userLanguage; // es-AR
+      var userLang = userLang.split('-')[0]; // es
+      localStorage.setItem("lang", userLang);
+    }
+
+  }
+  catch(err) {
+      console.log('No soporta localstorage')
+      if (typeof(err) !== "undefined") {
+        localStorage.setItem("lang", "es");
+      }
+  }
+
+    // settingUp i18n config
+    l10n.setLocale(localStorage.getItem("lang")); // first of all you must set locale. You can take it from anywhere, for instance navigator.language
+    l10n.setExtension('json'); // not required. By default 'json'
+    
+  // Loading i18n files
+  var langs = ["es","en","br"];
+  try {
+    langs.map(function (item, index) {
+       readTextFile("scripts/translations/"+item+".json", function(text){
+        var data = JSON.parse(text);
+        l10n.add(item, data);
+      });
+    });    
+  }
+  catch(err) {
+      console.log('Problema cargando los archivos i18n')
+  }
+
 }]);
+
 
 dondev2App.run(function ($rootScope, $timeout, $location) {
   $rootScope.$on("$routeChangeStart", function (event, next, current) {
@@ -161,6 +202,19 @@ $(document).ready(function(){
     $('.modal-trigger').leanModal();
     $(".button-collapse").sideNav();
 });
+
+// i18n
+function readTextFile(file, callback) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.overrideMimeType("application/json");
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4 && rawFile.status == "200") {
+            callback(rawFile.responseText);
+        }
+    }
+    rawFile.send(null);
+}
 
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {

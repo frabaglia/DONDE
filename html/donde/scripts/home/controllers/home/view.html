@@ -1,3 +1,17 @@
+<select class="browser-default" ng-model="selectedLang" 
+    ng-change="selectedLangChange(selectedLang)" 
+    id="langSelect">
+    <option value="" default selected>[[ 'SeleccionIdioma' | trans ]]</option>
+    <option ng-repeat="idioma in listaIdiomas" ng-value="[[idioma.label]]">
+    	[[idioma.label]]
+    </option>
+</select>
+
+<br>
+
+<span>[[ 'Titulo' | trans ]]</span> <br>
+<span>[[ 'Cuerpo' | trans  ]]</span><br>
+<span>[[ 'Pie' | trans ]]</span><br>
 <div class="home full new-home">
 	<div class="description wow description-home" ng-cloak ng-show="main">
 		<img class="logo" src="images/HUESPED_logo_donde_RGB-06.png">

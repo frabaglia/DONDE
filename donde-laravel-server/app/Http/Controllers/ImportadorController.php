@@ -1949,7 +1949,7 @@ public function geocode($book){
 		$address = urlencode($basicString);
 
 		try {
-			$url = "https://maps.google.com.ar/maps/api/geoco22de/json?address={$address}&key=AIzaSyBoXKGMHwhiMfdCqGsa6BPBuX43L-2Fwqs";
+			$url = "https://maps.google.com.ar/maps/api/geocode/json?address={$address}&key=AIzaSyBoXKGMHwhiMfdCqGsa6BPBuX43L-2Fwqs";
 
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $url);

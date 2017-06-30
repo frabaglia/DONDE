@@ -25,7 +25,7 @@
       </ul>
       
       <ul ng-show="navigating"  class="left wow fadeIn nav-wrapper">
-           <li style="width: 120px;"><a href="" onclick="window.history.back();"> <i class="mdi-navigation-chevron-left left"></i><span>Volver</span></a></li>
+           <li style="width: 120px;"><a href="" onclick="window.history.back();"> <i class="mdi-navigation-chevron-left left"></i><span>{{$i18n['volver']}}</span></a></li>
       </ul>
 
       <ul class="side-nav" id="mobile-demo">
@@ -104,7 +104,7 @@
     <div class="centrada-seo">
       <a href="{{ url('/form') }}" class="waves-effect waves-light btn btn-seo">
         <i class="mdi-navigation-chevron-right right"></i>
-        <i class="mdi-content-add-circle left"></i>Sugerir lugar</a>
+        <i class="mdi-content-add-circle left"></i>{{$i18n['SugerirLugar']}}</a>
       </div>  
     </div>
 
@@ -128,13 +128,13 @@
 	<div class="centrada-seo">
 		<a href="{{ url('listado-paises') }}" class="waves-effect waves-light btn btn-seo">
 			<i class="mdi-navigation-chevron-right right"></i>
-			<i class="mdi-action-search left"></i>Nueva búsqueda</a>
+			<i class="mdi-action-search left"></i>{{$i18n['NuevaBusqueda']}}</a>
 		</div>
 
 		<div class="centrada-seo">
 			<a href="{{ url('/form') }}" class="waves-effect waves-light btn btn-seo">
 				<i class="mdi-navigation-chevron-right right"></i>
-				<i class="mdi-content-add-circle left"></i>Sugerir lugar</a>
+				<i class="mdi-content-add-circle left"></i>{{$i18n['SugerirLugar']}}</a>
 			</div>	
 		</div>
 @endif

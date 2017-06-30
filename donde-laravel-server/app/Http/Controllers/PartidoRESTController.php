@@ -132,6 +132,7 @@ class PartidoRESTController extends Controller
 
     public function showCounty($pais,$provincia)
     {
+         $i18n = $this->getCityCopy();
 
         $partidos = DB::table('partido')
           ->join('provincia', 'provincia.id', '=', 'partido.idProvincia')
@@ -141,7 +142,62 @@ class PartidoRESTController extends Controller
           ->orderBy('nombre_partido')
           ->get();
 
-        return view('seo.cities',compact('partidos','provincia','pais'));
+        return view('seo.cities',compact('partidos','provincia','pais','i18n'));
     }
+
+    /**
+     * Set global lang value and return the setStateKeyWords for the first view
+     *
+     * @param  null
+     * @return array with key=>value
+     */ 
+      public function getCityCopy(){
+        return $this->setCityKeyWords(session()->get('lang'));
+     }
+
+     /**
+     * map global lang and their keywords
+     *
+     * @param  string langValue
+     * @return array with key=>value
+     */ 
+     public function setCityKeyWords($lang){
+      $result = "";
+      switch ($lang){
+         case "br":
+            $result = [
+               "pais" => "pais",
+               "provincia" => "provincia",
+               "partido" => "cidade",
+               "servicio" => "serviço",
+               "titulo" => "Seleccionao um Distrito",
+               "volver" => "br"
+            ];
+         break;
+         case "en":
+            $result = [
+               "pais" => "country",
+               "provincia" => "state",
+               "partido" => "city",
+               "servicio" => "service",
+               "titulo" => "Select District",
+               "volver" => "Return"
+            ];
+         break;        
+         default:
+            $result = [
+               "pais" => "pais",
+               "provincia" => "provincia",
+               "partido" => "partido",
+               "servicio" => "servicio",
+               "titulo" => "Selecciona un Distrito",
+               "volver" => "Volver"
+            ];
+         break;
+      }
+      return $result;
+   }
+
+
 
 }

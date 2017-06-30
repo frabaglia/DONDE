@@ -39,7 +39,7 @@
       </ul>
       
       <ul ng-show="navigating"  class="left wow fadeIn nav-wrapper">
-           <li style="width: 120px;"><a href="" onclick="window.history.back();"> <i class="mdi-navigation-chevron-left left"></i><span>Volver</span></a></li>
+           <li style="width: 120px;"><a href="" onclick="window.history.back();"> <i class="mdi-navigation-chevron-left left"></i><span>{{$i18n['volver']}}</span></a></li>
       </ul>
 
       <ul class="side-nav" id="mobile-demo">
@@ -58,7 +58,6 @@
     </div>
   </nav>
 
-
 <div class="boxLanding">
 	<ul class="collection">
 		<!-- Header Tabble -->
@@ -72,7 +71,7 @@
 		<li class="collection-item collection-seo">
 			<div class="row valign">
 				<div class="row left-align">
-					<i class="mdi-hardware-keyboard-arrow-down i-seo"></i> <span class="distanceLanding"><b>Selecciona una Provincia</b></span>
+					<i class="mdi-hardware-keyboard-arrow-down i-seo"></i> <span class="distanceLanding"><b>{{$i18n['titulo']}}</b></span>
 				</div>
 			</div>
 		</li>
@@ -82,7 +81,7 @@
 					<tbody>
 						@foreach ($provinces as $p)
 						<tr>
-							<td ><a class="item-seo" href="provincia/{{$p->nombre_provincia}}/partido">{{$p->nombre_provincia}}</a></td>
+							<td ><a class="item-seo" href="{{$i18n['provincia']}}/{{$p->nombre_provincia}}/{{$i18n['partido']}}">{{$p->nombre_provincia}}</a></td>
 						</tr>
 						@endforeach
 					</tbody>

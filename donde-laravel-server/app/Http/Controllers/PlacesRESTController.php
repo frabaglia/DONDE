@@ -17,8 +17,9 @@ use Auth;
 
 class PlacesRESTController extends Controller
 {
-   static public function showAll($pais,$provincia,$partido,$service){
+   public function showAll($pais,$provincia,$partido,$service){
 
+    $i18n = $this->getPlacesCopy();
 
     $places = DB::table('places')
       ->join('partido', 'places.idPartido', '=', 'partido.id')
@@ -244,8 +245,64 @@ foreach ($places as $p) {
 }
     $cantidad = count($places);
 
-    return view('seo.placesList',compact('places','cantidad','pais','provincia','partido','resu'));
+    return view('seo.placesList',compact('places','cantidad','pais','provincia','partido','resu','i18n'));
   }
+
+  /**
+     * Set global lang value and return the setStateKeyWords for the first view
+     *
+     * @param  null
+     * @return array with key=>value
+     */ 
+      public function getPlacesCopy(){
+        return $this->setPlacesKeyWords(session()->get('lang'));
+     }
+
+     /**
+     * map global lang and their keywords
+     *
+     * @param  string langValue
+     * @return array with key=>value
+     */ 
+     public function setPlacesKeyWords($lang){
+      $result = "";
+      switch ($lang){
+         case "br":
+            $result = [
+               "pais" => "pais",
+               "provincia" => "provincia",
+               "partido" => "cidade",
+               "servicio" => "serviço",
+               "NuevaBusqueda" => "Nova Pesquisa",
+               "SugerirLugar" => "Sugerir Lugar",
+               "volver" => "br"
+            ];
+         break;
+         case "en":
+            $result = [
+               "pais" => "country",
+               "provincia" => "state",
+               "partido" => "city",
+               "servicio" => "service",
+               "NuevaBusqueda" => "New Search",
+               "SugerirLugar" => "Suggest a Place",
+               "volver" => "Return"
+            ];
+         break;        
+         default:
+            $result = [
+               "pais" => "pais",
+               "provincia" => "provincia",
+               "partido" => "ciudad",
+               "servicio" => "servicio",
+               "NuevaBusqueda" => "Nueva Búsqueda",
+               "SugerirLugar" => "Sugerir Lugar",
+               "volver" => "Volver"
+            ];
+         break;
+      }
+      return $result;
+   }
 
 
   static public function getScalar($pid,$cid,$bid){

@@ -29,7 +29,7 @@
       
       <ul ng-show="navigating"  class="left wow fadeIn nav-wrapper">
            <li style="width: 120px;"><a href="" onclick="window.history.back();"> <i class="mdi-navigation-chevron-left left"></i>
-           <span>Volver</span></a></li>
+           <span>{{$i18n['volver']}}</span></a></li>
       </ul>
 
       <ul class="side-nav" id="mobile-demo">
@@ -62,7 +62,7 @@
 			<div class="row valign ">
 				<div class="Aligner-seo">
 					<div class="Aligner-item Aligner-item--top"><i class="mdi-hardware-keyboard-arrow-down i-seo"></i></div>
-					<div class="Aligner-item"><span><b>¿Qué estás buscando?</b></span></div>
+					<div class="Aligner-item"><span><b>{{$i18n['titulo']}}</b></span></div>
 				</div>
 			</div>
 		</li>
@@ -72,7 +72,7 @@
                 <div class="row">
                     @foreach ($allElements as $key => $service)
                         <div class="col s6 m6 l6 grid-seo">
-                            <a class="services-seo" href="servicio/{{$service['code']}}">
+                            <a class="services-seo" href="{{$i18n['servicio']}}/{{$service['code']}}">
                                 <div class="center promo">
                                  <img width="70px" src="../../../../../../images/{{$service['icon']}}">
                                  {{-- <img width="70px" src="/images/{{$service['icon']}}"> --}}

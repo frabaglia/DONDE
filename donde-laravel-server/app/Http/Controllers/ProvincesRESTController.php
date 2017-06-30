@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Provincia;
 use DB;
+use Session;
 
 class ProvincesRESTController extends Controller
 {
@@ -94,14 +95,72 @@ class ProvincesRESTController extends Controller
     public function showProvinces($pais){
         //si filtro por id
         // $provinces =  DB::table('provincia')->where('idPais', $id)->orderBy('nombre_provincia')->get();
+        
+        $i18n = $this->getStateCopy();
+
         $provinces =  DB::table('provincia')
             ->join('pais', 'pais.id', '=', 'provincia.idPais')
             ->where('nombre_pais',$pais)
             ->orderBy('nombre_provincia')
             ->select('nombre_provincia')
             ->get();
-        return view('seo.provinces',compact('provinces','pais'));
+        return view('seo.provinces',compact('provinces','pais','i18n'));
     }
+    /**
+     * Set global lang value and return the setStateKeyWords for the first view
+     *
+     * @param  null
+     * @return array with key=>value
+     */ 
+      public function getStateCopy(){
+        return $this->setStateKeyWords(session()->get('lang'));
+     }
+
+     /**
+     * map global lang and their keywords
+     *
+     * @param  string langValue
+     * @return array with key=>value
+     */ 
+     public function setStateKeyWords($lang){
+      $result = "";
+      switch ($lang){
+         case "br":
+            $result = [
+               "pais" => "pais",
+               "provincia" => "provincia",
+               "partido" => "cidade",
+               "titulo" => "Seleccionao uma Provincia",
+               "volver" => "br"
+            ];
+         break;
+         case "en":
+            $result = [
+               "pais" => "country",
+               "provincia" => "state",
+               "partido" => "city",
+               "titulo" => "Select State",
+               "volver" => "Return"
+            ];
+         break;        
+         default:
+            $result = [
+               "pais" => "pais",
+               "provincia" => "provincia",
+               "partido" => "partido",
+               "titulo" => "Selecciona una Provincia",
+               "volver" => "Volver"
+            ];
+         break;
+      }
+      return $result;
+   }
+
+
+
+
+
+
 
     static public function showByProvincia($id)
     {

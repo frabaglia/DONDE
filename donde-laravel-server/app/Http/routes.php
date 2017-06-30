@@ -60,10 +60,26 @@ Route::get('/share/{id}', 'MainRouteController@shareDetail');
 
 
 Route::get('/listado-paises', 'PaisRESTController@showCountries');
+Route::get('/listagem-paises', 'PaisRESTController@showCountries');
+Route::get('/country-list', 'PaisRESTController@showCountries');
+
 Route::get('pais/{pais}/provincia', 'ProvincesRESTController@showProvinces');
+Route::get('country/{pais}/state', 'ProvincesRESTController@showProvinces');
+
+
 Route::get('pais/{pais}/provincia/{provincia}/partido', 'PartidoRESTController@showCounty');
+Route::get('pais/{pais}/provincia/{provincia}/cidade', 'PartidoRESTController@showCounty');
+Route::get('country/{pais}/state/{provincia}/city', 'PartidoRESTController@showCounty');
+
+
 Route::get('pais/{pais}/provincia/{provincia}/partido/{partido}/servicio', 'SeoController@showServices');
+Route::get('pais/{pais}/provincia/{provincia}/cidade/{partido}/serviço', 'SeoController@showServices');
+Route::get('country/{pais}/state/{provincia}/city/{partido}/service', 'SeoController@showServices');
+
+
 Route::get('pais/{pais}/provincia/{provincia}/partido/{partido}/servicio/{code}', 'PlacesRESTController@showAll');
+Route::get('pais/{pais}/provincia/{provincia}/cidade/{partido}/serviço/{code}', 'PlacesRESTController@showAll');
+Route::get('country/{pais}/state/{provincia}/city/{partido}/service/{code}', 'PlacesRESTController@showAll');
 
 
 

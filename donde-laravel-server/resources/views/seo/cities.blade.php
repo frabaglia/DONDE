@@ -27,7 +27,7 @@
       </ul>
       
       <ul ng-show="navigating"  class="left wow fadeIn nav-wrapper">
-           <li style="width: 120px;"><a href="" onclick="window.history.back();"> <i class="mdi-navigation-chevron-left left"></i><span>Volver</span></a></li>
+           <li style="width: 120px;"><a href="" onclick="window.history.back();"> <i class="mdi-navigation-chevron-left left"></i><span>{{$i18n['volver']}}</span></a></li>
       </ul>
 
       <ul class="side-nav" id="mobile-demo">
@@ -59,7 +59,7 @@
 		<li class="collection-item collection-seo">
 			<div class="row valign">
 				<div class="row left-align">
-					<i class="mdi-hardware-keyboard-arrow-down i-seo"></i> <span class="distanceLanding"><b>Selecciona un Distrito</b></span>
+					<i class="mdi-hardware-keyboard-arrow-down i-seo"></i> <span class="distanceLanding"><b>{{$i18n['titulo']}}</b></span>
 				</div>
 			</div>
 		</li>
@@ -69,7 +69,7 @@
 					<tbody>
 						@foreach ($partidos as $p)
 						<tr>
-							<td><a class="item-seo" href="partido/{{$p->nombre_partido}}/servicio">{{$p->nombre_partido}}</a></td>
+							<td><a class="item-seo" href="{{$i18n['partido']}}/{{$p->nombre_partido}}/{{$i18n['servicio']}}">{{$p->nombre_partido}}</a></td>
 						</tr>
 						@endforeach
 					</tbody>

@@ -485,7 +485,7 @@ var translations_en =
    "back": "Example. La Boca o Lavalle",
    "noCities": "Back",
    "noResults": "There are no cities listed for [[partido]]",
-   "point": "We do not have registered places for free condoms delevery in [[ciudad]]",
+   "point": "[[rate]] points",
    "ile_argentina": "In Argentina abortion is legal under certain circumstances. You can access comprehensive legal abortion counseling and services at the following clinics.",
    "ile_bolivia": "In Bolivia abortion is legal under certain circumstances. You can access comprehensive legal abortion counseling and services at the following clinics.",
    "name": "Name",

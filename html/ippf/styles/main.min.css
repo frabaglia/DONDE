@@ -1489,6 +1489,7 @@ footer.page-footer {
 div.list {
   margin: 0;
   padding: 1em;
+  padding-top:0;
 }
 div.list div.services img {
   width: 50px;

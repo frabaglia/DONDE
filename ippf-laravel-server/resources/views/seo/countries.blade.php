@@ -70,7 +70,7 @@
 
 @include('acerca')
 
-
+ 
 @stop
 
 @section('js')

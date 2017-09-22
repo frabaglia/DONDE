@@ -1,18 +1,7 @@
 <div class="container resume">				
 	<div class="row" >
-		<div class="col s12 m6  wow bounceInLeft">
-			<ng-map id="mainMap"
-            zoom-to-include-markers="auto"
-            default-style="true">
-			   <marker 
-			   	  	icon="images/place-off.png"
-			   		ng-repeat="p in data"
-			   		on-click="showDetail(p)"
-              		position="[[p.latitude]],[[p.longitude]]">
-			    </marker>
-			   </ng-map>
-		</div>
-		<div class="col s12 m6 wow bounceInRight">
+	
+		<div class="col s12 m6 wow bounceInLeft ">
 			<div class="col s12 top" ng-cloak ng-hide="currentMarker">
 				<h5>Existen <strong class="orange-c"> [[data.length]] </strong> centros.</h5>
 				<p class="orange-c"> Elige el centro en el map o un país para ver más detalles.</p>
@@ -35,5 +24,17 @@
 			</div>	
 			<div ng-cloak ng-show="currentMarker" ng-include="'/resume/views/detalle.html'"></div>
 			  
+		</div>
+		<div class="col s12 m6  wow bounceInRight">
+			<ng-map id="mainMap"
+            zoom-to-include-markers="auto"
+            default-style="true">
+			   <marker 
+			   	  	icon="images/place-off.png"
+			   		ng-repeat="p in data"
+			   		on-click="showDetail(p)"
+              		position="[[p.latitude]],[[p.longitude]]">
+			    </marker>
+			   </ng-map>
 		</div>
 </div>

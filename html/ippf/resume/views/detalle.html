@@ -2,21 +2,23 @@
 <div class="home full new-home">
   <div class="detail row wow fadeIn fadeInRight" ng-cloak ng-show="currentMarker">
     <div class="contaner close">
-       <ul class="right wow fadeIn">
-            <li style="width: 120px;"><strong><a href="" ng-click="closeDetail()"> <i class="mdi-navigation-chevron-left left"></i><span translate="back"></span></strong></a></li>
-      </ul>
+       <div class="row">
+            <a href="" ng-click="closeDetail()">
+            <i class="mdi-navigation-chevron-left left"></i><span translate="back"></span></strong></a>
+
+      </div>
     </div>
     <div class="container list">
-   
-    <h3> [[currentMarker.nombre_pais]] </h3>
-    <p> <a>[[currentMarker.nombre_provincia]] > [[currentMarker.nombre_partido]] > [[currentMarker.nombre_ciudad]] </a></p>
-    </div>
-    <h4>[[currentMarker.establecimiento]] </h4>
-    <p><b>[[currentMarker.calle]] [[currentMarker.altura]] [[currentMarker.piso_depto]]</b>
-     <br> [[currentMarker.partido_comuna]]
-     <span ng-show="currentMarker.provincia_region"> ,</span> [[currentMarker.provincia_region]]</p>
-     <p ng-show="currentMarker.tipo"><strong><span>[[currentMarker.tipo]]</span> </strong></p>
-
+    <div class="row">
+      <h3> [[currentMarker.nombre_pais]] </h3>
+      <p> <a>[[currentMarker.nombre_provincia]] > [[currentMarker.nombre_partido]] > [[currentMarker.nombre_ciudad]] </a></p>
+      </div>
+      <h4>[[currentMarker.establecimiento]] </h4>
+      <p><b>[[currentMarker.calle]] [[currentMarker.altura]] [[currentMarker.piso_depto]]</b>
+       <br> [[currentMarker.partido_comuna]]
+       <span ng-show="currentMarker.provincia_region"> ,</span> [[currentMarker.provincia_region]]</p>
+       <p ng-show="currentMarker.tipo"><strong><span>[[currentMarker.tipo]]</span> </strong></p>
+     </div>
 
 
      <div class="row">

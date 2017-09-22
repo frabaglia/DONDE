@@ -15,6 +15,11 @@ angular.module('dondeDataVizApp').controller('HomeCtrl',
         var anchor = document.querySelector( '#top' );
         smoothScroll.animateScroll( anchor );
       }
+
+      $scope.goToMap =function(){
+        var anchor = document.querySelector( '#mainMap' );
+        smoothScroll.animateScroll( anchor );
+      }
       $scope.showDetail = function(i,p){
         $scope.currentMarker = p;
         for (var i = 0; i < $scope.ciudades.length; i++) {

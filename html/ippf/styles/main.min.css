@@ -1536,3 +1536,8 @@ div.list div.label {
 .country-image{
   max-width: 100%;
 }
+
+
+.container-logos{
+  padding: 1em;
+}

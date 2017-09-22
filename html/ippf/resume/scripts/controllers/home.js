@@ -9,11 +9,11 @@
  */
 angular.module('dondeDataVizApp').controller('HomeCtrl', 
   function (moment,NgMap, $interval, $scope,$timeout,$document,$http) {
-      var scroll = new SmoothScroll();
+
       $scope.closeDetail = function(){
         $scope.currentMarker = undefined;
         var anchor = document.querySelector( '#top' );
-        scroll.animateScroll( anchor );
+        smoothScroll.animateScroll( anchor );
       }
       $scope.showDetail = function(i,p){
         $scope.currentMarker = p;
@@ -27,7 +27,7 @@ angular.module('dondeDataVizApp').controller('HomeCtrl',
           }
         }
         var anchor = document.querySelector( '#top' );
-        scroll.animateScroll(anchor);
+       smoothScroll.animateScroll( anchor );
       }
 
      $http.get('/api/v1/places/all/autocomplete').then(function(d){

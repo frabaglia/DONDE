@@ -9,10 +9,9 @@
  */
 angular.module('dondeDataVizApp').controller('HomeCtrl', 
   function (moment,NgMap, $interval, $scope,$timeout,$document,$http) {
-
+      var scroll = new SmoothScroll();
       $scope.closeDetail = function(){
         $scope.currentMarker = undefined;
-        var scroll = new SmoothScroll();
         var anchor = document.querySelector( '#top' );
         scroll.animateScroll( anchor );
       }

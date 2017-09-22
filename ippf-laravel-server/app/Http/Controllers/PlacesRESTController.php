@@ -767,6 +767,20 @@ class PlacesRESTController extends Controller
         }
     }
 
+    public static function getCountryRanking()
+    {
+        
+            return
+              DB::table('places')
+                     ->select(
+                      DB::raw('count(*) as lugares, nombre_pais'))
+                     ->join('pais', 'places.idPais', '=', 'pais.id')
+                     ->orderBy('lugares', 'desc')
+                     ->groupBy('idPais')
+                     ->get();
+        
+    }
+
 
     public static function getNonGeoFilterByUser()
     {

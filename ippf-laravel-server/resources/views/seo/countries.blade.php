@@ -14,7 +14,7 @@
 @stop
 
 @section('content')
-
+<div ng-app="dondeDataVizApp">
 {{-- <nav>
 	<div class="nav-wrapper">
 		<ul id="nav-mobile" class="left hide-on-med-and-down">
@@ -58,10 +58,19 @@
       </ul>
     </div>
   </nav>
-<div ng-app="dondeDataVizApp">
+<div>
     <div class="container"> 
         <div ng-view></div>
     </div>
+    <div class="container">
+
+      <a href="" ng-click="getNow()" class="waves-effect waves-light btn wow" translate="search">
+        <i class="mdi-navigation-chevron-right right"></i>
+        <i class="mdi-editor-format-list-bulleted left"></i>
+      </a>
+    </div>
+</div>
+
 </div>
 
 
@@ -101,3 +110,4 @@
     <script src="/resume/scripts/controllers/home.js"></script>
     <!-- endbuild -->
 @stop
+

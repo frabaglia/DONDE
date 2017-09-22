@@ -1,4 +1,9 @@
-
+div.resume h5{
+  padding-top: 20px;
+}
+div.resume h3{
+  padding-top: 20px;
+}
 div.row.highlight{
    border:solid 3px ;
    border-color: #e6334c;

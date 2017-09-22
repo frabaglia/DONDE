@@ -28,7 +28,7 @@ angular.module('dondeDataVizApp').controller('HomeCtrl',
           }
         }
         var anchor = document.querySelector( '#top' );
-        scroll.animateScroll( anchor );
+        scroll.animateScroll(anchor);
       }
 
      $http.get('/api/v1/places/all/autocomplete').then(function(d){

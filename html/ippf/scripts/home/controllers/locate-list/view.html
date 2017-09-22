@@ -1,4 +1,4 @@
-<div class="home full new-home" style="padding-top: 25px;">
+<div class="home full new-home" >
 
 	<div class="container list">
 
@@ -43,13 +43,13 @@
 			</div>
 
 		</div>
+		
+			<img class="country-image" src="images/countries/[[countryImageTag]].jpg"></img>
+		<div  ng-cloak ng-hide="loading" class="member-container">	
+			<p ng-cloak><span translate="[[countryTextTag]]"></span></p>
 
-		<img class="country-image" src="images/countries/[[countryImageTag]].jpg"></img>
-
-		<p ng-cloak><span translate="[[countryTextTag]]"></span></p>
-
-		<p ng-cloak ng-show="service.title == 'ile_name'"><span translate="[[ileTag]]"></span></p>
-
+			<p ng-cloak ng-show="service.title == 'ile_name'"><span translate="[[ileTag]]"></span></p>
+		</div>
 		<h4 ng-cloak ng-show="cantidad > 1" translate="resultado_cantidad_titulo>1"  translate-values="{ cantidad: '[[cantidad]]'}"> </h4>
 
 		<h4 ng-cloak ng-show="cantidad == 1" translate="resultado_cantidad_titulo=1"> </h4>

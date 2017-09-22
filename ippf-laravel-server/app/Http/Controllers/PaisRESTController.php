@@ -158,6 +158,11 @@ class PaisRESTController extends Controller
         $countries =  DB::table('pais')->orderBy('nombre_pais')->get();
         return view('seo.countries', compact('countries'));
     }
+    public function showCountriesDetail()
+    {
+        $countries =  DB::table('pais')->orderBy('nombre_pais')->get();
+        return view('seo.detail', compact('countries'));
+    }
 
     public static function showByNombre($nombre)
     {

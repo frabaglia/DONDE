@@ -996,8 +996,9 @@ h3 {
 }
 
 h4 {
-  font-size: 1.5rem;
-  margin: 0px 0 14px 0;
+    font-size: 1.5rem;
+    margin: 0px 0 14px 0;
+    padding-top: 12px;
 }
 
 ng-map#mainMap {
@@ -1489,6 +1490,7 @@ footer.page-footer {
 div.list {
   margin: 0;
   padding: 1em;
+  padding-top:0;
 }
 div.list div.services img {
   width: 50px;
@@ -1534,5 +1536,15 @@ div.list div.label {
 }
 
 .country-image{
-  max-width: 100%;
+    max-width: 225px;
+}
+
+.member-container{
+  border: 2px solid #e6642f;
+  padding: 1em;
+  font-size: 0.75em;
+}
+
+.container-logos{
+  padding: 1em;
 }

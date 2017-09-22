@@ -82,6 +82,8 @@ return [
             'prefix'    => '',
             'strict'    => false,
 
+
+
             // // DO
             // 'driver'    => 'mysql',
             // 'host'      => env('DB_HOST', 'localhost'),

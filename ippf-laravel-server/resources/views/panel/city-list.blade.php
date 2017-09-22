@@ -28,12 +28,14 @@
       <table class="bordered striped responsive-table">
           <thead>
               <tr ng-cloak>
+
+                <th data-field="nombre" translate="panel_places_columntable_5"></th>              
                 <th data-field="nombre" translate="panel_places_columntable_1"></th>
                 <th data-field="nombre" translate="panel_places_columntable_2"></th>
+                <th data-field="nombre" translate="panel_places_columntable_6"></th>
                 <th data-field="nombre" translate="panel_places_columntable_3"></th>
                 <th data-field="nombre" translate="panel_places_columntable_4"></th>
-                <th data-field="nombre" translate="panel_places_columntable_5"></th>
-                <th data-field="nombre" translate="panel_places_columntable_6"></th>
+
             </tr>
           </thead>
           <tbody>

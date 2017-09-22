@@ -14,7 +14,10 @@
 @stop
 
 @section('content')
+<link rel="stylesheet" href="/resume/styles/resume.css">
 
+
+<div ng-app="dondeDataVizApp">
 {{-- <nav>
 	<div class="nav-wrapper">
 		<ul id="nav-mobile" class="left hide-on-med-and-down">
@@ -39,7 +42,7 @@
            <li><a class="" href="/listado-paises"><i class="mdi-action-language"></i></a></li>
       </ul>
 
-      <ul ng-show="navigating"  class="left wow fadeIn nav-wrapper">
+      <ul  class="left wow fadeIn nav-wrapper">
            <li style="width: 120px;"><a href="" onclick="window.history.back();"> <i class="mdi-navigation-chevron-left left"></i><span>@lang('site.seo_countries_nav_comeback')</span></a></li>
       </ul>
 
@@ -58,10 +61,26 @@
       </ul>
     </div>
   </nav>
-<div ng-app="dondeDataVizApp">
+<div>
     <div class="container"> 
         <div ng-view></div>
     </div>
+    <div class="container">
+    <div class="row">
+      <div class="col s0 m3 wow bounceInRight">
+         <p>  <p>
+      </div>
+      <div class="col s12 m6 wow bounceInRight">
+        <a href="/listado-detalle" class="waves-effect waves-light btn wow" translate="search">
+          <i class="mdi-navigation-chevron-right right"></i>
+          <i class="mdi-editor-format-list-bulleted left"></i>
+        </a>
+      </div>
+      </div>
+    </div>
+
+</div>
+
 </div>
 
 

@@ -10,7 +10,16 @@
 angular.module('dondeDataVizApp').controller('HomeCtrl', 
   function (moment,NgMap, $interval, $scope,$timeout,$document,$http) {
 
+      $scope.closeDetail = function(){
+        $scope.currentMarker = undefined;
+        var anchor = document.querySelector( '#top' );
+        smoothScroll.animateScroll( anchor );
+      }
 
+      $scope.goToMap =function(){
+        var anchor = document.querySelector( '#mainMap' );
+        smoothScroll.animateScroll( anchor );
+      }
       $scope.showDetail = function(i,p){
         $scope.currentMarker = p;
         for (var i = 0; i < $scope.ciudades.length; i++) {
@@ -22,6 +31,8 @@ angular.module('dondeDataVizApp').controller('HomeCtrl',
             break;
           }
         }
+        var anchor = document.querySelector( '#top' );
+       smoothScroll.animateScroll( anchor );
       }
 
      $http.get('/api/v1/places/all/autocomplete').then(function(d){

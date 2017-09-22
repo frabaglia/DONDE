@@ -1,11 +1,31 @@
-<div class="container">				
+<div class="container resume">				
 	<div class="row" >
-		<div class="col s12 m6  wow bounceInLeft">
-			<div class="col s12 top">
-				<h5><strong> Existen [[data.length]] Centros Disponibles </strong></h5>
-				<p> Elige el centro para ver mas detalles </p>
+	
+		<div class="col s12 m6 wow bounceInLeft ">
+			<div class="col s12 top" ng-cloak ng-hide="currentMarker">
+				<h5>Existen <strong class="orange-c"> [[data.length]] </strong> centros.</h5>
+				<p class="orange-c"> Elige el centro en el <strong ng-click="goToMap()"> mapa </strong> o un país para ver más detalles.</p>
 			</div>
-	        
+			<div ng-cloak ng-hide="currentMarker">
+						<div class="col s6">
+							<h5><strong> Pais </strong> </h5>
+						</div>
+						<div class="col s6">
+							<h5><strong> Centros </strong> </h5>
+						</div>
+				<div ng-repeat="c in ranking">
+					<div class="col s6">
+					 <p><a ng-href="/pais/[[c.nombre_pais]]/provincia">[[c.nombre_pais]] </a> </p>
+					</div>
+					<div class="col s6">
+					 <p><strong>[[c.lugares]] </strong></p>
+					</div>
+				</div>
+			</div>	
+			<div ng-cloak ng-show="currentMarker" ng-include="'/resume/views/detalle.html'"></div>
+			  
+		</div>
+		<div class="col s12 m6  wow bounceInRight">
 			<ng-map id="mainMap"
             zoom-to-include-markers="auto"
             default-style="true">
@@ -16,25 +36,5 @@
               		position="[[p.latitude]],[[p.longitude]]">
 			    </marker>
 			   </ng-map>
-		</div>
-		<div class="col s12 m6 wow bounceInRight">
-			<div ng-hide="currentMarker">
-						<div class="col s6">
-							<h3><strong> Pais </strong> </h3>
-						</div>
-						<div class="col s6">
-							<h3><strong> Centros </strong> </h3>
-						</div>
-				<div ng-repeat="c in ranking">
-					<div class="col s6">
-					[[c.nombre_pais]]
-					</div>
-					<div class="col s6">
-					[[c.lugares]]
-					</div>
-				</div>
-			</div>	
-			<div ng-include="'/resume/views/detalle.html'"></div>
-			  
 		</div>
 </div>

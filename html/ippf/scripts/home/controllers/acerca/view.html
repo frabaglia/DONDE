@@ -137,7 +137,7 @@
 				<div class="row">
 					<div class="col s12 m12 center-align" style="margin: 0 auto;">
 						<a href="https://twitter.com/IPPF_WHR" rel="external" target="_blank" class="ui-link">
-		<img class="newAboutIcon50" src="images/about/ippf.jpg" title="IPPF">IPPF</a>
+		<img class="newAboutIcon50" src="images/logo_ippf.png" title="IPPF"></a>
 					</div>
 				</div>
 			</p>
@@ -172,7 +172,7 @@
 				<div class="row">
 					<div class="col s12 m12 center-align" style="margin: 0 auto;">
 						<a href="https://www.huesped.org.ar/" rel="external" target="_blank" class="ui-link">
-		<img class="newAboutIcon50" src="images/about/fh.png" title="IPPF">Fundación Húesped</a>
+		<img class="newAboutIcon50" src="images/logo_huesped.png" title="IPPF"></a>
 					</div>
 				</div>
 			</p>

@@ -14,7 +14,7 @@
 @stop
 
 @section('content')
-<link rel="stylesheet" href="styles/resume.css">
+<link rel="stylesheet" href="/resume/styles/resume.css">
 
 
 <div ng-app="dondeDataVizApp">

@@ -1538,6 +1538,11 @@ div.list div.label {
     max-width: 225px;
 }
 
+.member-container{
+  border: 2px solid #e6642f;
+  padding: 1em;
+  font-size: 0.75em;
+}
 
 .container-logos{
   padding: 1em;

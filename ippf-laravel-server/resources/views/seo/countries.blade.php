@@ -66,12 +66,17 @@
         <div ng-view></div>
     </div>
     <div class="container">
-
-      <a href="" ng-click="getNow()" class="waves-effect waves-light btn wow" translate="search">
-        <i class="mdi-navigation-chevron-right right"></i>
-        <i class="mdi-editor-format-list-bulleted left"></i>
-      </a>
+      <div class="col s0 m6 wow bounceInRight">
+         <p>  <p>
+      </div>
+      <div class="col s12 m6 wow bounceInRight">
+        <a href="/listado-detalle" class="waves-effect waves-light btn wow" translate="search">
+          <i class="mdi-navigation-chevron-right right"></i>
+          <i class="mdi-editor-format-list-bulleted left"></i>
+        </a>
+      </div>
     </div>
+
 </div>
 
 </div>

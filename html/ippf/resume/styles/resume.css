@@ -116,3 +116,16 @@ div.share {
     margin-left: auto !important;
     margin-right: auto !important;
 }
+
+.resume p{
+  margin:0;
+  padding:0;
+}
+
+.orange{
+  color:#e6642f;
+}
+
+strong {
+    font-weight: 800;
+}

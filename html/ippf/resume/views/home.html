@@ -14,15 +14,15 @@
 		</div>
 		<div class="col s12 m6 wow bounceInRight">
 			<div class="col s12 top" ng-cloak ng-hide="currentMarker">
-				<h5><strong> Existen [[data.length]] Centros Disponibles </strong></h5>
-				<p> Elige el centro en el map o un país para ver más detalles.</p>
+				<h5>Existen <strong class="orange"> [[data.length]] </strong> Disponibles </h5>
+				<p class="orange"> Elige el centro en el map o un país para ver más detalles.</p>
 			</div>
 			<div ng-cloak ng-hide="currentMarker">
 						<div class="col s6">
-							<h3><strong> Pais </strong> </h3>
+							<h5><strong> Pais </strong> </h5>
 						</div>
 						<div class="col s6">
-							<h3><strong> Centros </strong> </h3>
+							<h5><strong> Centros </strong> </h5>
 						</div>
 				<div ng-repeat="c in ranking">
 					<div class="col s6">

@@ -16,6 +16,9 @@ Route::get('/phpHelp', function () {
         return File::get(public_path() . '/public/contador/index.html');
     });
 
+
+    
+Route::get('api/v2/countries/ranking', 'PlacesRESTController@getCountryRanking');
 Route::get('api/v2/getiletag/{idPais}', 'ServiceController@getIleTag'); //devuelve el tag para el json i18n correspondiente al idPais
 Route::get('changelang/{lang}', 'SeoController@changeLang'); //cambia el lenguaje de la app
 Route::get('api/v2/evaluacion/getallquestionsresponses', 'QuestionController@getAllQuestionsResponses'); //Obtiene todas las preguntas y respuestas para evaluacion
@@ -171,7 +174,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('api/v1/panel/provinces/{id}/cities', 'PaisRESTController@getAllCities');
-
 
     Route::get('api/v1panelplaces/ranking', 'PlacesRESTController@getCitiRanking');
     Route::get('api/v1panelplaces/nonGeo', 'PlacesRESTController@getNonGeo');

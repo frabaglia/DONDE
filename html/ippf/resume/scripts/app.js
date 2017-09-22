@@ -37,12 +37,12 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/home.html',
+        templateUrl: '/resume/views/home.html',
         controller: 'HomeCtrl',
         controllerAs: 'home'
       })
        .when('/map/:id', {
-        templateUrl: 'views/map.html',
+        templateUrl: '/resume/views/map.html',
         controller: 'mapCtrl',
         controllerAs: 'map'
       })

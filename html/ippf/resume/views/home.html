@@ -18,7 +18,23 @@
 			   </ng-map>
 		</div>
 		<div class="col s12 m6 wow bounceInRight">
-		<div ng-include="'views/detalle.html'"></div>
+			<div ng-hide="currentMarker">
+						<div class="col s6">
+							<h3><strong> Pais </strong> </h3>
+						</div>
+						<div class="col s6">
+							<h3><strong> Centros </strong> </h3>
+						</div>
+				<div ng-repeat="c in ranking">
+					<div class="col s6">
+					[[c.nombre_pais]]
+					</div>
+					<div class="col s6">
+					[[c.lugares]]
+					</div>
+				</div>
+			</div>	
+			<div ng-include="'/resume/views/detalle.html'"></div>
 			  
 		</div>
 </div>

@@ -11,7 +11,6 @@ angular.module('dondeDataVizApp').controller('HomeCtrl',
   function (moment,NgMap, $interval, $scope,$timeout,$document,$http) {
 
 
-      var server = 'https://ippf-staging.com.ar/';
       $scope.showDetail = function(i,p){
         $scope.currentMarker = p;
         for (var i = 0; i < $scope.ciudades.length; i++) {
@@ -25,9 +24,14 @@ angular.module('dondeDataVizApp').controller('HomeCtrl',
         }
       }
 
-     $http.get(server + '/api/v1/places/all/autocomplete').then(function(d){
+     $http.get('/api/v1/places/all/autocomplete').then(function(d){
       $scope.ciudades = d.data;
      });
+     $http.get('/api/v2/countries/ranking').then(function(d){
+      $scope.ranking = d.data;
+     });
+
+     
  
      $scope.data = [];
    		var getStats = function(){
@@ -47,7 +51,7 @@ angular.module('dondeDataVizApp').controller('HomeCtrl',
                }); 
             };
 
-            getNextPage(server + 'api/v2/places/getall');
+            getNextPage('api/v2/places/getall');
 
    		};
    		 

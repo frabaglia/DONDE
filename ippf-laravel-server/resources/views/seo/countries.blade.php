@@ -78,31 +78,20 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="/resume/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/resume/bower_components/underscore/underscore-min.js"></script>
-    <script src="/resume/bower_components/materialize/bin/materialize.js"></script>
-    <script src="/resume/bower_components/moment/min/moment-with-locales.min.js"></script>
-    <script src="/resume/bower_components/angular/angular.min.js"></script>
-    <script src="/resume/bower_components/angular-materialize/src/angular-materialize.js"></script>
-    <script src="/resume/bower_components/angular-route/angular-route.min.js"></script>
-    <script src="/resume/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-    <script src="/resume/bower_components/angular-cookies/angular-cookies.min.js"></script>
-    <script src="/resume/bower_components/wow.js/dist/wow.min.js"></script>
-    <script src="/resume/bower_components/angucomplete/angucomplete.js"></script>
     <script src="https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.js"></script>
     <script src="https://maps.google.com/maps/api/js?key=AIzaSyCjb5c-5XvzhvdMXCjIjNaK-Zdh-L_qVmM"></script>
-    <script src="/resume/bower_components/angular-translate/angular-translate.js"></script>
+    <script src="/bower_components/angular-translate/angular-translate.js"></script>
     <script src="/scripts/translations/es.js"></script>
     <script src="/scripts/translations/br.js"></script>
     <script src="/scripts/translations/en.js"></script>
   
 
-    <script src="/resume/bower_components/moment/moment.js"></script>
-    <script src="/resume/bower_components/angular-moment/angular-moment.js"></script>
-    <script src="/resume/bower_components/odometer/odometer.js"></script>
-    <script src="/resume/bower_components/angular-odometer-js/dist/angular-odometer.js"></script>
-    <script src="/resume/bower_components/angular-socialshare/angular-socialshare.js"></script>
-    <script src="/resume/bower_components/smooth-scroll/dist/js/smooth-scroll.min.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/angular-moment/angular-moment.js"></script>
+    <script src="/bower_components/odometer/odometer.js"></script>
+    <script src="/bower_components/angular-odometer-js/dist/angular-odometer.js"></script>
+    <script src="/bower_components/angular-socialshare/angular-socialshare.js"></script>
+    <script src="/bower_components/smooth-scroll/dist/js/smooth-scroll.min.js"></script>
     
     <!-- endbower -->
     <!-- endbuild -->

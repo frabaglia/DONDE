@@ -101,18 +101,18 @@ div.share {
     padding-bottom: 4px;
   }
 
-.home.new-home .detail {
+.resume .detail {
      padding: 0px; 
    
     margin-left: auto;
     margin-right: 20px;
 }
 
-.home.new-home {
+.resume {
   overflow-x: hidden;
 }
 
-.home.new-home  .container .row {
+.resume  .container .row {
     margin-left: auto !important;
     margin-right: auto !important;
 }

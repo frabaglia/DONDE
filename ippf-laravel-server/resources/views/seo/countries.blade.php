@@ -62,7 +62,7 @@
     </div>
   </nav>
 <div>
-    <div class="container" id="top"> 
+    <div class="container"> 
         <div ng-view></div>
     </div>
     <div class="container">

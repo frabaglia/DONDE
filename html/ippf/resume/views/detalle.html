@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="css/adhoc.css">
 <div class="home full new-home">
   <div class="detail row wow fadeIn fadeInRight" ng-cloak ng-show="currentMarker">
-    <div class="contaner">
+    <div class="contaner close">
        <ul class="right wow fadeIn">
-             <li style="width: 120px;"><a href=""> <i class="mdi-navigation-chevron-left left"></i><span translate="search"></span></a></li>
+            <li style="width: 120px;"><strong><a href="" ng-click="closeDetail()"> <i class="mdi-navigation-chevron-left left"></i><span translate="back"></span></strong></a></li>
       </ul>
     </div>
     <div class="container list">
@@ -39,4 +39,5 @@
 
 
 </div>
+
 

@@ -321,6 +321,7 @@ public function debug_to_console( $data ) {
 				$p->cruce,
 				$p->barrio_localidad,
 				//$p->partido_comuna,
+				$p->nombre_ciudad,
 				$p->nombre_partido,
 				//$p->provincia_region,
 				$p->nombre_provincia,
@@ -782,12 +783,13 @@ public function activePlacesExport(Request $request){
 		$idPais = $request_params['idPais'];
 		$idProvincia = $request_params['idProvincia'];
 		$idPartido = $request_params['idPartido'];
+		$idCiudad = $request_params['idCiudad'];
 		$placesController = new PlacesRESTController;
-		$places = $placesController->getAprobedPlaces($idPais, $idProvincia, $idPartido);
+		$places = $placesController->getAprobedPlaces($idPais, $idProvincia, $idPartido, $idCiudad);
 
 	//	var_dump($places);
 		if ((isset($places)) && (count($places) > 0)){
-			$copyCSV = "establecimientos_".$places[0]->nombre_partido."_".$places[0]->nombre_provincia."_".$places[0]->nombre_pais.".csv";
+			$copyCSV = "establecimientos_".$places[0]->nombre_ciudad."_".$places[0]->nombre_partido."_".$places[0]->nombre_provincia."_".$places[0]->nombre_pais.".csv";
 		}
 		else $copyCSV = "nodata.csv";
 
@@ -908,7 +910,7 @@ public function evaluationsExportFilterByService(Request $request){
 			}
 			$csv = Writer::createFromFileObject(new SplTempFileObject());
 			//header
-		  $csv->insertOne('id-establecimiento,nombre-establecimiento,direccion,barrio_localidad,partido,provincia,pais,condones,prueba,mac,ile,dc,ssr,es_rapido,Id Evaluación,¿Que buscó?,¿Se lo dieron?,Información clara,Privacidad,es_gratuito,comodo,Información_vacunas_edad,Edad,Edad Especifica,Género,Puntuación,Comentario,¿Aprobado?,Fecha,Servicio');
+		  $csv->insertOne('id-establecimiento,nombre-establecimiento,direccion,barrio_localidad,ciudad,partido,provincia,pais,condones,prueba,mac,ile,dc,ssr,es_rapido,Id Evaluación,¿Que buscó?,¿Se lo dieron?,Información clara,Privacidad,es_gratuito,comodo,Información_vacunas_edad,Edad,Edad Especifica,Género,Puntuación,Comentario,¿Aprobado?,Fecha,Servicio');
 			//body
 
 			foreach ($evaluations as $p) {
@@ -937,6 +939,7 @@ public function evaluationsExportFilterByService(Request $request){
 			    	$p['establecimiento'],
 						$p['direccion'],
 					$p['barrio_localidad'],
+					$p['nombre_ciudad'],
 					$p['nombre_partido'],
 					$p['nombre_provincia'],
 					$p['nombre_pais'],

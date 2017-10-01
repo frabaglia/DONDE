@@ -11,6 +11,7 @@ use App\Ciudad;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
+use Auth;
 
 class CiudadRESTController extends Controller
 {
@@ -53,6 +54,49 @@ class CiudadRESTController extends Controller
 
      public function showCities()
     {
+
+      $userId = Auth::user()->id;
+      $roll = Auth::user()->roll;
+
+      if ($roll == 'administrador') {
+
+        $ciudades = DB::table('ciudad')
+          ->join('partido', 'partido.id', '=', 'ciudad.idPartido')
+          ->join('provincia', 'provincia.id', '=', 'ciudad.idProvincia')
+          ->join('pais', 'pais.id', '=', 'ciudad.idPais')
+          ->leftJoin('places', function($join){
+            $join->on('places.idCiudad', '=', 'ciudad.id')->where('places.aprobado','=','1');
+          })
+          ->select('ciudad.nombre_ciudad', 'ciudad.id', 'partido.nombre_partido','provincia.nombre_provincia','pais.nombre_pais','ciudad.habilitado', DB::raw("COUNT(places.idCiudad) as countPlaces"))
+          ->groupBy('ciudad.id')
+          ->orderBy('countPlaces')
+          ->get();
+
+      }
+
+      else{
+
+        $ciudades = DB::table('ciudad')
+          ->join('partido', 'partido.id', '=', 'ciudad.idPartido')
+          ->join('provincia', 'provincia.id', '=', 'ciudad.idProvincia')
+          ->join('pais', 'pais.id', '=', 'ciudad.idPais')
+           ->join('user_country', 'user_country.id_country' , '=', 'pais.id')
+          ->leftJoin('places', function($join){
+            $join->on('places.idCiudad', '=', 'ciudad.id')->where('places.aprobado','=','1');
+          })
+          ->select('ciudad.nombre_ciudad', 'ciudad.id', 'partido.nombre_partido','provincia.nombre_provincia','pais.nombre_pais','ciudad.habilitado', DB::raw("COUNT(places.idCiudad) as countPlaces"))
+          ->where('user_country.id_user', '=', $userId)
+          ->groupBy('ciudad.id')
+          ->orderBy('countPlaces')
+          ->get();
+
+      }
+
+      return $ciudades;
+    }
+
+     public function showCitiesByUser($idUser)
+    {
       return DB::table('ciudad')
       ->join('partido', 'partido.id', '=', 'ciudad.idPartido')
       ->join('provincia', 'provincia.id', '=', 'ciudad.idProvincia')
@@ -65,6 +109,7 @@ class CiudadRESTController extends Controller
       ->orderBy('countPlaces')
       ->get();
     }
+
 
     public function updateHabilitado(Request $request, $id)
     {

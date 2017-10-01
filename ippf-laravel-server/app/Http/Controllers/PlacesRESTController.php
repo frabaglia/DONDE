@@ -1240,15 +1240,34 @@ class PlacesRESTController extends Controller
 
     public function getAllApproved(Request $request)
     {
-        try {
-            return DB::table('places')
-              ->where('aprobado', '=' , 1) 
-              ->select('establecimiento')
-              ->get();
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }    
+
+      $userId = Auth::user()->id;
+      $roll = Auth::user()->roll;
+
+      if ($roll == 'administrador') {
+
+        $places =  DB::table('places')
+          ->where('aprobado', '=' , 1) 
+          ->select('establecimiento')
+          ->get();
+
+      }
+      else{
+
+        $places =  DB::table('places')
+          ->join('pais', 'pais.id', '=', 'places.idPais')
+          ->join('user_country', 'user_country.id_country' , '=', 'pais.id') 
+          ->where('aprobado', '=' , 1) 
+          ->where('user_country.id_user', '=', $userId)
+          ->select('establecimiento')
+          ->get();
+
+
+      }
+
+      return $places;
+
+}
 
     public function getAllPartidos(Request $request)
     {

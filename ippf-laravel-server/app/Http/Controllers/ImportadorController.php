@@ -910,34 +910,34 @@ public function evaluationsExportFilterByService(Request $request){
 			}
 			$csv = Writer::createFromFileObject(new SplTempFileObject());
 			//header
-		  $csv->insertOne('id-establecimiento,nombre-establecimiento,direccion,barrio_localidad,ciudad,partido,provincia,pais,condones,prueba,mac,ile,dc,ssr,es_rapido,Id Evaluación,¿Que buscó?,¿Se lo dieron?,Información clara,Privacidad,es_gratuito,comodo,Información_vacunas_edad,Edad,Edad Especifica,Género,Puntuación,Comentario,¿Aprobado?,Fecha,Servicio');
+		  $csv->insertOne('id-establecimiento,nombre-establecimiento,direccion,barrio_localidad,ciudad,partido,provincia,pais,condones,prueba,mac,ile,dc,ssr,es_rapido,Id Evaluacion,¿Que busco?,Edad,Género,Puntuación,Comentario,¿Aprobado?,Fecha,Servicio');
 			//body
 
 			foreach ($evaluations as $p) {
 	   	 		$p = (array)$p;
 						if (in_array($p['service'], $services)) {
 				$p['service']= $this->parseService($p['service']);
-				$p['edadEspecifica']= $this->parseEdadEspecifica($p['edad']);
+				//$p['edadEspecifica']= $this->parseEdadEspecifica($p['edad']);
 				$p['condones']= $this->parseToExport($p['condones']);
 				$p['prueba']= $this->parseToExport($p['prueba']);
 				$p['ssr']= $this->parseToExport($p['ssr']);
 				$p['dc']= $this->parseToExport($p['dc']);
 				$p['mac']= $this->parseToExport($p['mac']);
 				$p['ile']= $this->parseToExport($p['ile']);
-				$p['ssr']= $this->parseToExport($p['ssr']);
-				$p['dc']= $this->parseToExport($p['dc']);
+				//$p['ssr']= $this->parseToExport($p['ssr']);
+				//$p['dc']= $this->parseToExport($p['dc']);
 				$p['es_rapido']= $this->parseToExport($p['es_rapido']);
-				$p['info_ok']= $this->parseToExport($p['info_ok']);
-				$p['privacidad_ok']= $this->parseToExport($p['privacidad_ok']);
+				//$p['info_ok']= $this->parseToExport($p['info_ok']);
+				//$p['privacidad_ok']= $this->parseToExport($p['privacidad_ok']);
 				$p['aprobado']= $this->parseToExport($p['aprobado']);
 				$p['direccion']= $p['calle']." ".$p['altura'];
-					$p['es_gratuito']= $this->parseToExport($p['es_gratuito']);
-					$p['comodo']= $this->parseToExport($p['comodo']);
-					$p['informacion_vacunas']= $this->parseToExport($p['informacion_vacunas']);
+					//$p['es_gratuito']= $this->parseToExport($p['es_gratuito']);
+					//$p['comodo']= $this->parseToExport($p['comodo']);
+					//$p['informacion_vacunas']= $this->parseToExport($p['informacion_vacunas']);
 				$csv->insertOne([
 			    	$p['placeId'],
 			    	$p['establecimiento'],
-						$p['direccion'],
+					$p['direccion'],
 					$p['barrio_localidad'],
 					$p['nombre_ciudad'],
 					$p['nombre_partido'],
@@ -951,22 +951,22 @@ public function evaluationsExportFilterByService(Request $request){
 					$p['ssr'],
 					$p['es_rapido'],
 
-			    	$p['id'],
+			    	$p['id'],	    	
 			    	$p['que_busca'],
-			    	$p['le_dieron'],
-					$p['info_ok'],
-					$p['privacidad_ok'],
-					$p['es_gratuito'],
-					$p['comodo'],
-					$p['informacion_vacunas'],
-					$p['edadEspecifica'],
+			    	//$p['le_dieron'],
+					//$p['info_ok'],
+					//$p['privacidad_ok'],
+					//$p['es_gratuito'],
+					//$p['comodo'],
+					//$p['informacion_vacunas'],
+					//$p['edadEspecifica'],
 					$p['edad'],
 					$p['genero'],
 					$p['voto'],
 					$p['comentario'],
 					$p['aprobado'],
 					$p['created_at'],
-					$p['service']
+					$p['service']					
 
 					]);
 			}

@@ -7,7 +7,7 @@
          </div>
          <br>
 <div ng-cloak ng-show="counters" class="wow fadeIn">
-    <h2><span translate="there_are"></span> <strong>[[counters.lugares]]</strong><span translate="places_in"></span><strong> VAMOS. </strong></h2>
+    <h2><span translate="there_are"></span> <strong>[[counters.lugares]] </strong><span translate="places_in"></span><strong> VAMOS. </strong></h2>
 
     <p>  <strong>[[counters.aprobados]]</strong> <span translate="panel_dash_summary_1"> </span><strong>[[counters.rechazados]] </strong> <span translate="panel_dash_summary_2" translate-values="{pendings: ' [[counters.pendientes]]'}"></span></p>
 

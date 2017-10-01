@@ -307,7 +307,7 @@ $rootScope.disableExportEvaluationButton = function(){
 
   $rootScope.getNow = function(){
    $rootScope.loadingPost = true;
-      $http.get('api/v1/places/approved/' +   $rootScope.selectedCountry.id  + '/' +  $rootScope.selectedProvince.id + '/' + $rootScope.selectedParty + '/' +   $rootScope.selectedCity )
+      $http.get('api/v1/places/approved/' +   $rootScope.selectedCountry.id  + '/' +  $rootScope.selectedProvince.id + '/' + $rootScope.selectedParty.id + '/' +   $rootScope.selectedCity.id )
               .success(function(response) {
     $rootScope.optionMaster1 = true;
     $rootScope.optionMaster2 = false;
@@ -362,7 +362,7 @@ $rootScope.searchQuery = "";
     $rootScope.loadCity = function() {
     $rootScope.showCity = true;
     placesFactory.getCitiesForPartidos({
-      id: $rootScope.selectedParty
+      id: $rootScope.selectedParty.id
     }, function(data) {
       $scope.cities = data;
       $rootScope.cities = data;
@@ -386,13 +386,18 @@ $rootScope.searchQuery = "";
 
   $rootScope.showPartidos = function(){
 
+
     $rootScope.partidoOn= true;
+    placesFactory.getPartidosForProvince( $rootScope.selectedProvince.id,function(data){
+       $rootScope.parties = data;
+    });
+  /*  $rootScope.partidoOn= true;
      $http.get('api/v1/provinces/'+
      $rootScope.selectedProvince.id +'/partidos')
      .success(function(parties){
                 $scope.parties = parties;
                 $rootScope.parties = parties;
-              });
+              });*/
 
   }
 

@@ -15,6 +15,31 @@
 <!-- Actualizar ({{$cantidadActualizar}})  -->
 	<h4 class="left-align"> <i class="mdi-navigation-arrow-drop-down"></i> <b translate="importer_confirmfastid_title_2" translate-values="{count: '{{$cantidadActualizar}}'}"></b></h4>
 
+
+@if($cPaisesNoPermitidos > 0)
+<div class="container">	
+
+	<div >
+
+		<table class="striped">
+
+			<thead>
+				<th class="text-center"><i class="mdi-navigation-arrow-drop-down"></i> Países Denegados ({{$cPaisesNoPermitidos}})</th>
+			</thead>
+
+			@foreach ($paisesNoPermitidos as $pais)
+			<tbody>
+				<td class="text-center"> {{$pais}} </td>
+			</tbody>
+			@endforeach
+
+		</table>
+
+	</div>
+
+</div>
+@endif
+
 	<div class="row">
 		<table class="striped">
 			<thead>

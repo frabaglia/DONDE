@@ -79,6 +79,7 @@ Route::group(['middleware' => CheckLang::class], function () {
     Route::get('api/v2/provincia/getall', 'PlacesRESTController@getAllProvincias');
     Route::get('api/v2/partido/getall', 'PlacesRESTController@getAllPartidos');
     Route::get('api/v2/evaluation/getall', 'EvaluationRESTController@getAllEvaluations');
+
 });
 
 
@@ -109,7 +110,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/v2/evaluacion/panel/{id}/block', 'EvaluationRESTController@block');
     Route::post('api/v2/evaluacion/panel/{id}/approve', 'EvaluationRESTController@approve');
 
-
+  Route::get('api/v1/evaluation/getall', 'EvaluationRESTController@getAll');
+  Route::get('api/v1/evaluation/getall/{paisId}/{pciaId}/{partyId}/{cityId}', 'EvaluationRESTController@getAllByCity');
 
 
     Route::get('/api/v1panel/cleardb', 'ImportadorController@cleardb'); // <------------------- limpia base de datos

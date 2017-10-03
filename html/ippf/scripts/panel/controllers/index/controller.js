@@ -30,6 +30,13 @@ dondev2App.config(function($interpolateProvider, $locationProvider) {
 
           });
 
+   $http.get('api/v1/evaluation/getall')
+              .success(function(response) {
+
+                  $scope.evaluations = response;
+          });              
+
+
   $rootScope.exportEvalClick = "";
 
     $rootScope.openExportEvalModal = function(){
@@ -307,7 +314,15 @@ $rootScope.disableExportEvaluationButton = function(){
 
   $rootScope.getNow = function(){
    $rootScope.loadingPost = true;
-      $http.get('api/v1/places/approved/' +   $rootScope.selectedCountry.id  + '/' +  $rootScope.selectedProvince.id + '/' + $rootScope.selectedParty.id + '/' +   $rootScope.selectedCity.id )
+
+
+    if($scope.selectedCity != undefined )
+      $rootScope.cityId = $scope.selectedCity.id;
+    else
+      $rootScope.cityId = $scope.selectedCityEval.id;
+
+
+      $http.get('api/v1/places/approved/' +   $rootScope.countryId  + '/' +  $rootScope.provinceId + '/' + $rootScope.partyId + '/' +   $rootScope.cityId)
               .success(function(response) {
     $rootScope.optionMaster1 = true;
     $rootScope.optionMaster2 = false;
@@ -316,6 +331,23 @@ $rootScope.disableExportEvaluationButton = function(){
 
           });
   }
+
+  $rootScope.getNowEval = function(){
+   $rootScope.loadingPost = true;
+console.log('entro a filtar evals');
+
+    if($scope.selectedCity != undefined )
+      $rootScope.cityId = $scope.selectedCity.id;
+    else
+      $rootScope.cityId = $scope.selectedCityEval.id;
+
+
+      $http.get('api/v1/evaluation/getall/' +   $rootScope.countryId  + '/' +  $rootScope.provinceId + '/' + $rootScope.partyId + '/' +   $rootScope.cityId)
+              .success(function(response) {
+    $rootScope.evaluations = response;
+
+          });
+  }  
 
    $http.get('api/v2/panel/places/countersfilterbyuser')
               .success(function(response) {
@@ -361,8 +393,14 @@ $rootScope.searchQuery = "";
 
     $rootScope.loadCity = function() {
     $rootScope.showCity = true;
+
+    if($scope.selectedParty != undefined )
+      $rootScope.partyId = $scope.selectedParty.id;
+    else
+      $rootScope.partyId = $scope.selectedPartyEval.id;
+
     placesFactory.getCitiesForPartidos({
-      id: $rootScope.selectedParty.id
+      id: $rootScope.partyId
     }, function(data) {
       $scope.cities = data;
       $rootScope.cities = data;
@@ -377,7 +415,12 @@ $rootScope.searchQuery = "";
   $rootScope.showProvince = function(){
 
     $rootScope.provinceOn= true;
-    placesFactory.getProvincesForCountry( $rootScope.selectedCountry.id,function(data){
+    if($scope.selectedCountry != undefined )
+      $rootScope.countryId = $scope.selectedCountry.id;
+    else
+      $rootScope.countryId = $scope.selectedCountryEval.id;
+
+    placesFactory.getProvincesForCountry( $rootScope.countryId,function(data){
        $rootScope.provinces = data;
     });
 
@@ -388,7 +431,13 @@ $rootScope.searchQuery = "";
 
 
     $rootScope.partidoOn= true;
-    placesFactory.getPartidosForProvince( $rootScope.selectedProvince.id,function(data){
+
+    if($scope.selectedProvince != undefined )
+      $rootScope.provinceId = $scope.selectedProvince.id;
+    else
+      $rootScope.provinceId = $scope.selectedProvinceEval.id;
+
+    placesFactory.getPartidosForProvince( $rootScope.provinceId,function(data){
        $rootScope.parties = data;
     });
   /*  $rootScope.partidoOn= true;

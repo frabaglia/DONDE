@@ -1,5 +1,7 @@
 @extends('layouts.panel-master')
 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 {!!Html::style('styles/import.min.css')!!}
 {!!Html::style('bower_components/materialize/bin/materialize.css')!!}
 

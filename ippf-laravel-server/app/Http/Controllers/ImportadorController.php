@@ -2305,6 +2305,7 @@ public function importCsv(Request $request){
 			->withErrors($validator->messages())
 			->withInput();
 		}
+
 		$params = $request_params;
 
 		$book = $this->csvPrimeraFila($request);
@@ -2312,6 +2313,7 @@ public function importCsv(Request $request){
 		$tmpFile = Input::file('file')->getClientOriginalName();
 		$_SESSION['csvname'] = $tmpFile;
 		session(['csvname' => $tmpFile]);
+		$_SESSION['denied']= array();
 		$_SESSION['cPaisesNoPermitidos'] = 0;
 		Storage::disk('local')->put($tmpFile, \File::get($request->file('file')));
 
@@ -2319,17 +2321,19 @@ public function importCsv(Request $request){
 		if(!is_null($book['id'])){
 			$_SESSION['Actualizar'] = array();
 			$_SESSION['cActualizar'] = 0;
-			Excel::load(storage_path().'/app/'.$tmpFile, function($reader){
+			Excel::load(storage_path().'/app/'.$tmpFile, function($reader) use ($userCountries){
 				foreach ($reader->get() as $book) {
-
 					// Filter updates
 					if(($userCountries == "null") || (($userCountries != "null") && ($this->existIn($userCountries, $book->pais))) ) {
 						array_push($_SESSION['Actualizar'],$this->agregarActualizar($book));
 						$_SESSION['cActualizar']++;
 					}
 					else{
-						array_push($_SESSION['denied'], $book->pais);
-						$_SESSION['cPaisesNoPermitidos']++;
+						// Verify that it is not already added
+						if(!in_array($book->pais, $_SESSION['denied'])){
+							array_push($_SESSION['denied'], $book->pais);
+							$_SESSION['cPaisesNoPermitidos']++;
+						}
 					}
 				}
 			});
@@ -2351,7 +2355,7 @@ public function importCsv(Request $request){
 			}
 			// Insert proccess without coordinates 
 			else {
-				return $this->preAdd($request);
+				return $this->preAdd($request, $userCountries);
 			}
 		}
 	}
@@ -2644,7 +2648,7 @@ public function preAddNoGeo(Request $request, $userCountries) {
 		$_SESSION['NuevosPartido']= array();
 		$_SESSION['NuevosPlaces']= array();
 		$_SESSION['NuevosCiudades']= array();
-		$_SESSION['rejected']= array();
+		$_SESSION['denied']= array();
 
 		$_SESSION['cPais']=0;
 		$_SESSION['cProvincia']=0;
@@ -2661,7 +2665,7 @@ public function preAddNoGeo(Request $request, $userCountries) {
 		Excel::load(storage_path().'/app/'.$tmpFile, function($reader) use ($userCountries){
 			foreach ($reader->get() as $book) {
 
-				// If country is allowed or is an adinistrator
+			// If country is allowed or is an adinistrator
 			if(($userCountries == "null") || (($userCountries != "null") && ($this->existIn($userCountries, $book->pais))) ) {
 
 				if($this->esIncompleto($book)){
@@ -2777,9 +2781,11 @@ public function preAddNoGeo(Request $request, $userCountries) {
 	        }// del if  de país permitido
 
 	        else{
-	        	array_push($_SESSION['rejected'], $book->pais);
-	        	$_SESSION['cPaisesNoPermitidos']++;
-
+						// Verify that it is not already added
+	        	if(!in_array($book->pais, $_SESSION['denied'])){
+	        		array_push($_SESSION['denied'], $book->pais);
+	        		$_SESSION['cPaisesNoPermitidos']++;
+	        	}
 	        }
 			}//del for each
 		});//del exel::load
@@ -2788,12 +2794,12 @@ public function preAddNoGeo(Request $request, $userCountries) {
 		$nuevosProvincias =$_SESSION['NuevosProvincia'];
 		$nuevosPartidos =$_SESSION['NuevosPartido'];
 		$nuevosCiudades =$_SESSION['NuevosCiudades'];
-		$paisesNoPermitidos = $_SESSION['rejected'];
 		$cantidadPais = $_SESSION['cPais'];
 		$cantidadProvincia = $_SESSION['cProvincia'];
 		$cantidadPartido = $_SESSION['cPartido'];
 		$cantidadCiudad = $_SESSION['cCiudad'];
 		$cPaisesNoPermitidos = $_SESSION['cPaisesNoPermitidos'];
+		$paisesNoPermitidos = $_SESSION['denied'];
 		$nombreFile =  $_SESSION['nombreFile'];
 
 		return view('panel.importer.preview-ng',compact('nuevosPaises','nuevosProvincias','nuevosPartidos','nuevosCiudades','nombreFile','cantidadPais','cantidadProvincia','cantidadPartido', 'cantidadCiudad','paisesNoPermitidos', 'cPaisesNoPermitidos'));
@@ -2803,7 +2809,7 @@ public function preAddNoGeo(Request $request, $userCountries) {
 //	RUTA PREVIEW, VISUALIZO LOS NUEVOS DATOS
 //=================================================================================================================
 //=================================================================================================================
-public function preAdd(Request $request) {
+public function preAdd(Request $request, $userCountries) {
 	// $request_params = $request->all();
 	// if ($request->hasFile('file'))
 	// 	$ext = $request->file('file')->getClientOriginalExtension();
@@ -2834,6 +2840,8 @@ public function preAdd(Request $request) {
 		$_SESSION['cProvincia']=0;
 		$_SESSION['cPartido']=0;
 		//$_SESSION['cCiudad']=0;
+		$_SESSION['denied'] = array();
+		$_SESSION['cPaisesNoPermitidos'] = 0;
 
 	   	$tmpFile = Input::file('file')->getClientOriginalName();
 	   	$_SESSION['nombreFile'] = $tmpFile;
@@ -2841,8 +2849,12 @@ public function preAdd(Request $request) {
 	   	session(['csvname' => $tmpFile]);
 	   	Storage::disk('local')->put($tmpFile, \File::get($request->file('file') ) );
 	   	//Cargo en memoria el csv para desp meterlo en la DB
-		Excel::load(storage_path().'/app/'.$tmpFile, function($reader){
+		Excel::load(storage_path().'/app/'.$tmpFile, function($reader) use ($userCountries){
 			foreach ($reader->get() as $book) {
+
+			// If country is allowed or is an adinistrator
+			if(($userCountries == "null") || (($userCountries != "null") && ($this->existIn($userCountries, $book->pais))) ) {
+
 				if($this->esIncompleto($book))
 					continue;
 				else{
@@ -2960,6 +2972,15 @@ public function preAdd(Request $request) {
 							// }
 			            } //del if (%LatLng)
 	            }// del else qe no es incompleto
+	        }// del if  de país permitido
+
+	        else{
+				// Verify that it is not already added
+	        	if(!in_array($book->pais, $_SESSION['denied'])){
+	        		array_push($_SESSION['denied'], $book->pais);
+	        		$_SESSION['cPaisesNoPermitidos']++;
+	        	}
+	        }
 			}//del for each
 		});//del exel::load
 		//Armo los datos para mostrar
@@ -2970,7 +2991,10 @@ public function preAdd(Request $request) {
 		$cantidadProvincia = $_SESSION['cProvincia'];
 		$cantidadPartido = $_SESSION['cPartido'];
 		$nombreFile =  $_SESSION['nombreFile'];
-		return view('panel.importer.preview',compact('nuevosPaises','nuevosProvincias','nuevosPartidos','nombreFile','cantidadPais','cantidadProvincia','cantidadPartido'));
+		$cPaisesNoPermitidos = $_SESSION['cPaisesNoPermitidos'];
+		$paisesNoPermitidos = $_SESSION['denied'];
+
+		return view('panel.importer.preview',compact('nuevosPaises','nuevosProvincias','nuevosPartidos','nombreFile','cantidadPais','cantidadProvincia','cantidadPartido', 'paisesNoPermitidos', 'cPaisesNoPermitidos'));
 
 }
 //=================================================================================================================
@@ -3079,9 +3103,14 @@ public function confirmAdd(Request $request){ //vista results, agrego a BD
 	$_SESSION['Descartados']= array();
 	$_SESSION['Incompletos']= array();
 
+	$userCountries = $this->getCountriesAllowed();
+
    	//Cargo en memoria el csv para desp meterlo en la DB
-	Excel::load(storage_path().'/app/'.$request->fileName, function($reader){
+	Excel::load(storage_path().'/app/'.$request->fileName, function($reader) use ($userCountries) {
 		foreach ($reader->get() as $book) {
+		
+		if(($userCountries == "null") || (($userCountries != "null") && ($this->existIn($userCountries, $book->pais))) ) {
+
 			$address = $book->calle;
 			if (is_numeric($book->altura))
 				$address = $address.' '.$book->altura;
@@ -3157,7 +3186,7 @@ public function confirmAdd(Request $request){ //vista results, agrego a BD
 			    array_push($_SESSION['Nuevos'],$this->agregarNuevo($book,$latLng));
 			}
 
-
+	   	 }//del if
 		}//del for each
 	});//del exel::load
 	$datosNuevos = $_SESSION['Nuevos'];

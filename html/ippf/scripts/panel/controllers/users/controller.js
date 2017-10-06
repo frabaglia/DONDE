@@ -58,10 +58,10 @@ dondev2App.config(function($interpolateProvider, $locationProvider) {
       $http.post('../api/v2/usercountries/'+$scope.userId, $scope.list)
         .then(
           function(response) {
-            Materialize.toast("Exito")
+            Materialize.toast("Exito", 3000);
           },
           function(response) {
-            Materialize.toast("Problema al ejecutar la acción, inténtelo nuevamente más tarde", 5000)
+            Materialize.toast("Problema al ejecutar la acción, inténtelo nuevamente más tarde", 5000);
           }
         );
     }

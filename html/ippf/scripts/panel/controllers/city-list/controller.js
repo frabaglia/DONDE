@@ -3,12 +3,14 @@ dondev2App.config(function($interpolateProvider, $locationProvider) {
     $interpolateProvider.endSymbol(']]');
   })
 
-  .controller('cityListController', function($scope, $rootScope, $http, $interpolate, $translate) {
+  .controller('cityListController', function($scope, $rootScope, $http, $interpolate, $translate, $window) {
 
   
 
     $scope.loadingPrev = true;
     $scope.loadingPost = true;
+
+    console.log($window.localStorage.getItem('idUser_countries'));
 
     $http.get('../api/v1/panel/ciudad/panel')
       .success(function(response) {

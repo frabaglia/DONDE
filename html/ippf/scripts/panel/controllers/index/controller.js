@@ -23,12 +23,19 @@ dondev2App.config(function($interpolateProvider, $locationProvider) {
 
 .controller('panelIndexController', function(NgMap,copyService, placesFactory,$filter, $scope, $timeout, $rootScope, $http, $interpolate, $location, $route, $translate) {
 
-   $http.get('api/v2/places/getAllApproved')
+   $http.get('api/v1/places/approved')
               .success(function(response) {
 
                   $scope.places = response;
 
           });
+
+   $http.get('api/v1/evaluation/getall')
+              .success(function(response) {
+
+                  $scope.evaluations = response;
+          });              
+
 
   $rootScope.exportEvalClick = "";
 
@@ -211,7 +218,7 @@ $rootScope.disableExportEvaluationButton = function(){
                   $rootScope.loadingPost = false;
                   //TODO: Move to service
                   var count = _.countBy(response, function(l){
-                    return l.nombre_partido + ", " + l.nombre_provincia } );
+                    return l.nombre_ciudad + ',' + l.nombre_partido + ", " + l.nombre_provincia } );
                   var mapped = _.map(count,function(n,k){return {
                     key: k,count:n, percentage:n*100/response.length};});
                   var ordered = _.sortBy(mapped,"count").reverse();
@@ -232,6 +239,7 @@ $rootScope.disableExportEvaluationButton = function(){
    var idPais;
    var idProvincia;
    var idPartido;
+   var idCiudad;
    if (typeof $rootScope.selectedCountry == "undefined") {
      idPais = null;
 
@@ -242,16 +250,24 @@ $rootScope.disableExportEvaluationButton = function(){
 
    }
       else idProvincia = $rootScope.selectedProvince.id;
-   if (typeof $rootScope.selectedCity === 'undefined'){
+   if (typeof $rootScope.selectedParty == 'undefined'){
      idPartido = null;
 
    }
-   else idPartido = $rootScope.selectedCity.id;
+   else idPartido = $rootScope.selectedParty;
+
+      if (typeof $rootScope.selectedCity == 'undefined'){
+     idCiudad = null;
+
+   }
+   else idCiudad = $rootScope.selectedCity;
+
 
     var data =  $.param({
       'idPais' : idPais,
       'idProvincia' : idProvincia,
-      'idPartido' : idPartido
+      'idPartido' : idPartido,
+      'idCiudad' : idCiudad
     });
 
     var f = document.createElement("form");
@@ -273,6 +289,12 @@ $rootScope.disableExportEvaluationButton = function(){
     i3.setAttribute('name',"idPartido");
     i3.setAttribute('value',idPartido);
 
+    var i4 = document.createElement("input"); //input element, text
+    i4.setAttribute('type',"hidden");
+    i4.setAttribute('name',"idCiudad");
+    i4.setAttribute('value',idCiudad);
+
+
     var s = document.createElement("input"); //input element, Submit button
     s.setAttribute('type',"submit");
     s.setAttribute('value',"Submit");
@@ -281,17 +303,26 @@ $rootScope.disableExportEvaluationButton = function(){
     f.appendChild(i1);
     f.appendChild(i2);
     f.appendChild(i3);
+    f.appendChild(i4);
     f.appendChild(s);
 
     document.getElementsByTagName('body')[0].appendChild(f);
     f.submit();
     $rootScope.loadingPost = false;
-    document.removeChild(f);
+    document.getElementsByTagName('body')[0].removeChild(f);
   };
 
   $rootScope.getNow = function(){
    $rootScope.loadingPost = true;
-      $http.get('api/v1/places/approved/' +   $rootScope.selectedCountry.id  + '/' +  $rootScope.selectedProvince.id + '/' + $rootScope.selectedParty + '/' +   $rootScope.selectedCity )
+
+
+    if($scope.selectedCity != undefined )
+      $rootScope.cityId = $scope.selectedCity.id;
+    else
+      $rootScope.cityId = $scope.selectedCityEval.id;
+
+
+      $http.get('api/v1/places/approved/' +   $rootScope.countryId  + '/' +  $rootScope.provinceId + '/' + $rootScope.partyId + '/' +   $rootScope.cityId)
               .success(function(response) {
     $rootScope.optionMaster1 = true;
     $rootScope.optionMaster2 = false;
@@ -300,6 +331,23 @@ $rootScope.disableExportEvaluationButton = function(){
 
           });
   }
+
+  $rootScope.getNowEval = function(){
+   $rootScope.loadingPost = true;
+console.log('entro a filtar evals');
+
+    if($scope.selectedCity != undefined )
+      $rootScope.cityId = $scope.selectedCity.id;
+    else
+      $rootScope.cityId = $scope.selectedCityEval.id;
+
+
+      $http.get('api/v1/evaluation/getall/' +   $rootScope.countryId  + '/' +  $rootScope.provinceId + '/' + $rootScope.partyId + '/' +   $rootScope.cityId)
+              .success(function(response) {
+    $rootScope.evaluations = response;
+
+          });
+  }  
 
    $http.get('api/v2/panel/places/countersfilterbyuser')
               .success(function(response) {
@@ -345,8 +393,14 @@ $rootScope.searchQuery = "";
 
     $rootScope.loadCity = function() {
     $rootScope.showCity = true;
+
+    if($scope.selectedParty != undefined )
+      $rootScope.partyId = $scope.selectedParty.id;
+    else
+      $rootScope.partyId = $scope.selectedPartyEval.id;
+
     placesFactory.getCitiesForPartidos({
-      id: $rootScope.selectedParty
+      id: $rootScope.partyId
     }, function(data) {
       $scope.cities = data;
       $rootScope.cities = data;
@@ -361,7 +415,12 @@ $rootScope.searchQuery = "";
   $rootScope.showProvince = function(){
 
     $rootScope.provinceOn= true;
-    placesFactory.getProvincesForCountry( $rootScope.selectedCountry.id,function(data){
+    if($scope.selectedCountry != undefined )
+      $rootScope.countryId = $scope.selectedCountry.id;
+    else
+      $rootScope.countryId = $scope.selectedCountryEval.id;
+
+    placesFactory.getProvincesForCountry( $rootScope.countryId,function(data){
        $rootScope.provinces = data;
     });
 
@@ -370,13 +429,24 @@ $rootScope.searchQuery = "";
 
   $rootScope.showPartidos = function(){
 
+
     $rootScope.partidoOn= true;
+
+    if($scope.selectedProvince != undefined )
+      $rootScope.provinceId = $scope.selectedProvince.id;
+    else
+      $rootScope.provinceId = $scope.selectedProvinceEval.id;
+
+    placesFactory.getPartidosForProvince( $rootScope.provinceId,function(data){
+       $rootScope.parties = data;
+    });
+  /*  $rootScope.partidoOn= true;
      $http.get('api/v1/provinces/'+
      $rootScope.selectedProvince.id +'/partidos')
      .success(function(parties){
                 $scope.parties = parties;
                 $rootScope.parties = parties;
-              });
+              });*/
 
   }
 

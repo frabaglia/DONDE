@@ -458,7 +458,7 @@ dondev2App.config(function($interpolateProvider, $locationProvider) {
 
     document.getElementsByTagName('body')[0].appendChild(f);
     f.submit();
-    document.removeChild(f);
+    document.getElementsByTagName('body')[0].removeChild(f);
 
   };
 

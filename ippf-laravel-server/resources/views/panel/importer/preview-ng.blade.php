@@ -1,5 +1,7 @@
 @extends('layouts.panel-master')
 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 {!!Html::style('styles/import.min.css')!!}
 {!!Html::style('bower_components/materialize/bin/materialize.css')!!}
 
@@ -54,6 +56,31 @@
 	</div>
 
 </div>
+
+
+@if($cPaisesNoPermitidos > 0)
+<div class="container">	
+
+	<div >
+
+		<table class="striped">
+
+			<thead>
+				<th class="text-center"><i class="mdi-navigation-arrow-drop-down"></i> Países Denegados ({{$cPaisesNoPermitidos}})</th>
+			</thead>
+
+			@foreach ($paisesNoPermitidos as $pais)
+			<tbody>
+				<td class="text-center"> {{$pais}} </td>
+			</tbody>
+			@endforeach
+
+		</table>
+
+	</div>
+
+</div>
+@endif
 
 <br><br>
 

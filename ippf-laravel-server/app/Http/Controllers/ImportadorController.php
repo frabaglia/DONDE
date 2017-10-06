@@ -26,6 +26,8 @@ use App\Exceptions\CustomException;
 use App\Exceptions\ImporterException;
 use App\Exceptions\CsvException;
 
+use Illuminate\Database\Eloquent\Collection;
+
 
 use App\PlaceLog;
 use PHPExcel_Cell;
@@ -36,17 +38,11 @@ use SplFileInfo;
 use Auth;
 
 class ImportadorController extends Controller {
+
 	public $csvColumns = 'id,establecimiento,tipo,calle,altura,piso_dpto,cruce,barrio_localidad,ciudad,partido_comuna,provincia_region,pais,aprobado,observacion,formattedaddress,latitude,longitude,habilitado,confidence,condones,prueba,mac,ile,dc,ssr,es_rapido,tel_distrib,mail_distrib,horario_distrib,responsable_distrib,web_distrib,ubicacion_distrib,comentarios_distrib,tel_testeo,mail_testeo,horario_testeo,responsable_testeo,web_testeo,ubicacion_testeo,observaciones_testeo,tel_mac,mail_mac,horario_mac,responsable_mac,web_mac,ubicacion_mac,comentarios_mac,tel_ile,mail_ile,horario_ile,responsable_ile,web_ile,ubicacion_ile,comentarios_ile,tel_dc,mail_dc,horario_dc,responsable_dc,web_dc,ubicacion_dc,comentarios_dc,tel_ssr,mail_ssr,horario_ssr,responsable_ssr,web_ssr,ubicacion_ssr,comentarios_ssr,servicetype_condones,servicetype_prueba,servicetype_mac,servicetype_ile,servicetype_dc,servicetype_ssr,friendly_condones,friendly_prueba,friendly_mac,friendly_ile,friendly_dc,friendly_ssr';
 	public $csvColumns_arrayFormat = array('id','establecimiento','tipo','calle','altura','piso_dpto','cruce','barrio_localidad','ciudad','partido_comuna','provincia_region','pais','aprobado','observacion','formattedaddress','latitude','longitude','habilitado','confidence','condones','prueba','mac','ile','dc','ssr','es_rapido','tel_distrib','mail_distrib','horario_distrib','responsable_distrib','web_distrib','ubicacion_distrib','comentarios_distrib','tel_testeo','mail_testeo','horario_testeo','responsable_testeo','web_testeo','ubicacion_testeo','observaciones_testeo','tel_mac','mail_mac','horario_mac','responsable_mac','web_mac','ubicacion_mac','comentarios_mac','tel_ile','mail_ile','horario_ile','responsable_ile','web_ile','ubicacion_ile','comentarios_ile','tel_dc','mail_dc','horario_dc','responsable_dc','web_dc','ubicacion_dc','comentarios_dc','tel_ssr','mail_ssr','horario_ssr','responsable_ssr','web_ssr','ubicacion_ssr','comentarios_ssr','servicetype_condones','servicetype_prueba','servicetype_mac','servicetype_ile','servicetype_dc','servicetype_ssr','friendly_condones','friendly_prueba','friendly_mac','friendly_ile','friendly_dc','friendly_ssr');
 	//public $placeColumns = array('placeId','establecimiento','tipo','calle','altura','piso_dpto','cruce','barrio_localidad','partido_comuna','provincia_region','pais','aprobado','observacion','formattedAddress','latitude','longitude','habilitado','confidence','condones','prueba','mac','ile','ssr','dc','es_rapido','tel_testeo','mail_testeo','horario_testeo','responsable_testeo','web_testeo','ubicacion_testeo','observaciones_testeo','tel_distrib','mail_distrib','horario_distrib','responsable_distrib','web_distrib','ubicacion_distrib','comentarios_distrib','tel_mac','mail_mac','horario_mac','responsable_mac','web_mac','ubicacion_mac','comentarios_mac','tel_ile','mail_ile','horario_ile','responsable_ile','web_ile','ubicacion_ile','comentarios_ile','tel_ssr','mail_ssr','horario_ssr','responsable_ssr','web_ssr','ubicacion_ssr','comentarios_ssr','tel_dc','mail_dc','horario_dc','responsable_dc','web_dc','ubicacion_dc','comentarios_dc','servicetype_ile','servicetype_mac','servicetype_condones','servicetype_prueba','servicetype_ssr','servicetype_dc','friendly_ile','friendly_mac','friendly_condones','friendly_prueba','friendly_ssr','friendly_dc');
 
-public function debug_to_console( $data ) {
-    $output = $data;
-    if ( is_array( $output ) )
-        $output = implode( ',', $output);
-
-    echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
-}
 
 	public function convertPlaceObjectToArray($placeObject,$status){
 
@@ -321,6 +317,7 @@ public function debug_to_console( $data ) {
 				$p->cruce,
 				$p->barrio_localidad,
 				//$p->partido_comuna,
+				$p->nombre_ciudad,
 				$p->nombre_partido,
 				//$p->provincia_region,
 				$p->nombre_provincia,
@@ -782,12 +779,13 @@ public function activePlacesExport(Request $request){
 		$idPais = $request_params['idPais'];
 		$idProvincia = $request_params['idProvincia'];
 		$idPartido = $request_params['idPartido'];
+		$idCiudad = $request_params['idCiudad'];
 		$placesController = new PlacesRESTController;
-		$places = $placesController->getAprobedPlaces($idPais, $idProvincia, $idPartido);
+		$places = $placesController->getAprobedPlaces($idPais, $idProvincia, $idPartido, $idCiudad);
 
 	//	var_dump($places);
 		if ((isset($places)) && (count($places) > 0)){
-			$copyCSV = "establecimientos_".$places[0]->nombre_partido."_".$places[0]->nombre_provincia."_".$places[0]->nombre_pais.".csv";
+			$copyCSV = "establecimientos_".$places[0]->nombre_ciudad."_".$places[0]->nombre_partido."_".$places[0]->nombre_provincia."_".$places[0]->nombre_pais.".csv";
 		}
 		else $copyCSV = "nodata.csv";
 
@@ -908,35 +906,36 @@ public function evaluationsExportFilterByService(Request $request){
 			}
 			$csv = Writer::createFromFileObject(new SplTempFileObject());
 			//header
-		  $csv->insertOne('id-establecimiento,nombre-establecimiento,direccion,barrio_localidad,partido,provincia,pais,condones,prueba,mac,ile,dc,ssr,es_rapido,Id Evaluación,¿Que buscó?,¿Se lo dieron?,Información clara,Privacidad,es_gratuito,comodo,Información_vacunas_edad,Edad,Edad Especifica,Género,Puntuación,Comentario,¿Aprobado?,Fecha,Servicio');
+		  $csv->insertOne('id-establecimiento,nombre-establecimiento,direccion,barrio_localidad,ciudad,partido,provincia,pais,condones,prueba,mac,ile,dc,ssr,es_rapido,Id Evaluacion,¿Que busco?,Edad,Género,Puntuación,Comentario,¿Aprobado?,Fecha,Servicio');
 			//body
 
 			foreach ($evaluations as $p) {
 	   	 		$p = (array)$p;
 						if (in_array($p['service'], $services)) {
 				$p['service']= $this->parseService($p['service']);
-				$p['edadEspecifica']= $this->parseEdadEspecifica($p['edad']);
+				//$p['edadEspecifica']= $this->parseEdadEspecifica($p['edad']);
 				$p['condones']= $this->parseToExport($p['condones']);
 				$p['prueba']= $this->parseToExport($p['prueba']);
 				$p['ssr']= $this->parseToExport($p['ssr']);
 				$p['dc']= $this->parseToExport($p['dc']);
 				$p['mac']= $this->parseToExport($p['mac']);
 				$p['ile']= $this->parseToExport($p['ile']);
-				$p['ssr']= $this->parseToExport($p['ssr']);
-				$p['dc']= $this->parseToExport($p['dc']);
+				//$p['ssr']= $this->parseToExport($p['ssr']);
+				//$p['dc']= $this->parseToExport($p['dc']);
 				$p['es_rapido']= $this->parseToExport($p['es_rapido']);
-				$p['info_ok']= $this->parseToExport($p['info_ok']);
-				$p['privacidad_ok']= $this->parseToExport($p['privacidad_ok']);
+				//$p['info_ok']= $this->parseToExport($p['info_ok']);
+				//$p['privacidad_ok']= $this->parseToExport($p['privacidad_ok']);
 				$p['aprobado']= $this->parseToExport($p['aprobado']);
 				$p['direccion']= $p['calle']." ".$p['altura'];
-					$p['es_gratuito']= $this->parseToExport($p['es_gratuito']);
-					$p['comodo']= $this->parseToExport($p['comodo']);
-					$p['informacion_vacunas']= $this->parseToExport($p['informacion_vacunas']);
+					//$p['es_gratuito']= $this->parseToExport($p['es_gratuito']);
+					//$p['comodo']= $this->parseToExport($p['comodo']);
+					//$p['informacion_vacunas']= $this->parseToExport($p['informacion_vacunas']);
 				$csv->insertOne([
 			    	$p['placeId'],
 			    	$p['establecimiento'],
-						$p['direccion'],
+					$p['direccion'],
 					$p['barrio_localidad'],
+					$p['nombre_ciudad'],
 					$p['nombre_partido'],
 					$p['nombre_provincia'],
 					$p['nombre_pais'],
@@ -948,22 +947,22 @@ public function evaluationsExportFilterByService(Request $request){
 					$p['ssr'],
 					$p['es_rapido'],
 
-			    	$p['id'],
+			    	$p['id'],	    	
 			    	$p['que_busca'],
-			    	$p['le_dieron'],
-					$p['info_ok'],
-					$p['privacidad_ok'],
-					$p['es_gratuito'],
-					$p['comodo'],
-					$p['informacion_vacunas'],
-					$p['edadEspecifica'],
+			    	//$p['le_dieron'],
+					//$p['info_ok'],
+					//$p['privacidad_ok'],
+					//$p['es_gratuito'],
+					//$p['comodo'],
+					//$p['informacion_vacunas'],
+					//$p['edadEspecifica'],
 					$p['edad'],
 					$p['genero'],
 					$p['voto'],
 					$p['comentario'],
 					$p['aprobado'],
 					$p['created_at'],
-					$p['service']
+					$p['service']					
 
 					]);
 			}
@@ -1120,6 +1119,11 @@ public function exportarMuestra(){
 
 public function exportar(){
 
+
+		$userId = Auth::user()->id;
+        $roll = Auth::user()->roll;
+
+
 		// contenedor de nombres
 		$names = array();
 		array_push($names,storage_path("encabezado.csv"));
@@ -1139,6 +1143,7 @@ public function exportar(){
 	    	->join('pais','pais.id','=','places.idPais')
 	    	->join('provincia','provincia.id','=','places.idProvincia')
 	    	->join('partido','partido.id','=','places.idPartido')
+	    	->join('ciudad','ciudad.id','=','places.idCiudad')
 	    	->count();
 
 	    $n = $n / 1000;
@@ -1148,15 +1153,33 @@ public function exportar(){
 	    //agrupo los files segun la cantidad de grupos que tenga.
 	    for ($i=0; $i < $n; $i++) {
     	array_push($names, storage_path("file".$i.".csv") );
-			$placeColumns = array('placeId','establecimiento','tipo','calle','altura','piso_dpto','cruce','barrio_localidad','partido.nombre_partido','provincia.nombre_provincia','pais.nombre_pais','aprobado','observacion','formattedAddress','latitude','longitude','places.habilitado','confidence','condones','prueba','mac','ile','dc','ssr','es_rapido','tel_distrib','mail_distrib','horario_distrib','responsable_distrib','web_distrib','ubicacion_distrib','comentarios_distrib','tel_testeo','mail_testeo','horario_testeo','responsable_testeo','web_testeo','ubicacion_testeo','observaciones_testeo','tel_mac','mail_mac','horario_mac','responsable_mac','web_mac','ubicacion_mac','comentarios_mac','tel_ile','mail_ile','horario_ile','responsable_ile','web_ile','ubicacion_ile','comentarios_ile','tel_dc','mail_dc','horario_dc','responsable_dc','web_dc','ubicacion_dc','comentarios_dc','tel_ssr','mail_ssr','horario_ssr','responsable_ssr','web_ssr','ubicacion_ssr','comentarios_ssr','servicetype_condones','servicetype_prueba','servicetype_mac','servicetype_ile','servicetype_dc','servicetype_ssr','friendly_condones','friendly_prueba','friendly_mac','friendly_ile','friendly_dc','friendly_ssr');
-		    $places = DB::table('places')
+			$placeColumns = array('placeId','establecimiento','tipo','calle','altura','piso_dpto','cruce','barrio_localidad','ciudad.nombre_ciudad','partido.nombre_partido','provincia.nombre_provincia','pais.nombre_pais','aprobado','observacion','formattedAddress','latitude','longitude','places.habilitado','confidence','condones','prueba','mac','ile','dc','ssr','es_rapido','tel_distrib','mail_distrib','horario_distrib','responsable_distrib','web_distrib','ubicacion_distrib','comentarios_distrib','tel_testeo','mail_testeo','horario_testeo','responsable_testeo','web_testeo','ubicacion_testeo','observaciones_testeo','tel_mac','mail_mac','horario_mac','responsable_mac','web_mac','ubicacion_mac','comentarios_mac','tel_ile','mail_ile','horario_ile','responsable_ile','web_ile','ubicacion_ile','comentarios_ile','tel_dc','mail_dc','horario_dc','responsable_dc','web_dc','ubicacion_dc','comentarios_dc','tel_ssr','mail_ssr','horario_ssr','responsable_ssr','web_ssr','ubicacion_ssr','comentarios_ssr','servicetype_condones','servicetype_prueba','servicetype_mac','servicetype_ile','servicetype_dc','servicetype_ssr','friendly_condones','friendly_prueba','friendly_mac','friendly_ile','friendly_dc','friendly_ssr');
+
+			// Places filtered by user
+      		if ($roll == 'administrador') {
+		     $places = DB::table('places')
 		    	->join('pais','pais.id','=','places.idPais')
 		    	->join('provincia','provincia.id','=','places.idProvincia')
 		    	->join('partido','partido.id','=','places.idPartido')
+		    	->join('ciudad','ciudad.id','=','places.idCiudad')
 		    	->skip($i*1000)
 		    	->take(1000)
 		        ->select($placeColumns)
 		        ->get();
+		    }
+		    else{
+		     $places = DB::table('places')
+		    	->join('pais','pais.id','=','places.idPais')
+		    	->join('provincia','provincia.id','=','places.idProvincia')
+		    	->join('partido','partido.id','=','places.idPartido')
+		    	->join('ciudad','ciudad.id','=','places.idCiudad')
+		    	->join('user_country','user_country.id_country','=','pais.id')
+		    	->where('user_country.id_user', '=', $userId)
+		    	->skip($i*1000)
+		    	->take(1000)
+		        ->select($placeColumns)
+		        ->get();
+		    }
 
 			$file = fopen(storage_path("file".$i.".csv"),"w");
 
@@ -1375,15 +1398,6 @@ public function geocode($book){
 
 						$geoResults = $geoResult;
 					}
-
-					/*if(isset($geoResults['partido']))
-						$this->debug_to_console('País: '.$geoResults['country'].' - Provincia: '.$geoResults['state'].' - Partido: '.$geoResults['partido'].' - Ciudad: '.$geoResults['city']);
-					else
-						$this->debug_to_console('País: '.$geoResults['country'].' - Provincia: '.$geoResults['state'].' - Partido: no tiene - Ciudad: '.$geoResults['city']);
-					$this->debug_to_console($geoResults['lati'].','.$geoResults['longi']);
-					$this->debug_to_console($geoResults['formatted_address']);
-					if(isset($geoResult['county'])){$this->debug_to_console('County: '.$geoResult['county']);}
-					else{$this->debug_to_console("No tiene county (political)");}*/
 
 					$faltaAlgo = false;
 					if (!isset($geoResults['state'])) $faltaAlgo = true;
@@ -2212,9 +2226,34 @@ public function checkAllColumns($rowColumns){
 	return $failColumns;
 }
 
+public function getCountriesAllowed(){
+
+	$userId = Auth::user()->id;
+	$roll = Auth::user()->roll;
+
+	if ($roll == 'supervisor') {
+
+		$userCountries = DB::table('pais')
+		->join('user_country', 'pais.id', '=', 'user_country.id_country')
+		->where('user_country.id_user', '=', $userId)
+		->select('pais.nombre_pais')
+		->get();
+	}
+	else{
+
+		$userCountries = "null";
+
+	}
+
+	return $userCountries;
+}
+
+
 public function importCsv(Request $request){
 
 	$request_params = $request->all();
+
+	$userCountries = $this->getCountriesAllowed();
 
 	if ($request->hasFile('file')){
 
@@ -2256,6 +2295,7 @@ public function importCsv(Request $request){
 			->withErrors($validator->messages())
 			->withInput();
 		}
+
 		$params = $request_params;
 
 		$book = $this->csvPrimeraFila($request);
@@ -2263,35 +2303,49 @@ public function importCsv(Request $request){
 		$tmpFile = Input::file('file')->getClientOriginalName();
 		$_SESSION['csvname'] = $tmpFile;
 		session(['csvname' => $tmpFile]);
+		$_SESSION['denied']= array();
+		$_SESSION['cPaisesNoPermitidos'] = 0;
 		Storage::disk('local')->put($tmpFile, \File::get($request->file('file')));
 
 		/* ------------ UPDATE WITH ID ------------ */
 		if(!is_null($book['id'])){
 			$_SESSION['Actualizar'] = array();
 			$_SESSION['cActualizar'] = 0;
-			Excel::load(storage_path().'/app/'.$tmpFile, function($reader){
+			Excel::load(storage_path().'/app/'.$tmpFile, function($reader) use ($userCountries){
 				foreach ($reader->get() as $book) {
-					array_push($_SESSION['Actualizar'],$this->agregarActualizar($book));
-					$_SESSION['cActualizar']++;
+					// Filter updates
+					if(($userCountries == "null") || (($userCountries != "null") && ($this->existIn($userCountries, $book->pais))) ) {
+						array_push($_SESSION['Actualizar'],$this->agregarActualizar($book));
+						$_SESSION['cActualizar']++;
+					}
+					else{
+						// Verify that it is not already added
+						if(!in_array($book->pais, $_SESSION['denied'])){
+							array_push($_SESSION['denied'], $book->pais);
+							$_SESSION['cPaisesNoPermitidos']++;
+						}
+					}
 				}
 			});
 
 			$datosActualizar = $_SESSION['Actualizar'];
 
 			$cantidadActualizar = $_SESSION['cActualizar'];
+			$paisesNoPermitidos = $_SESSION['denied'];
+			$cPaisesNoPermitidos = $_SESSION['cPaisesNoPermitidos'];
 			session(['datosActualizar' => $_SESSION['Actualizar']]);
 
-			return view('panel.importer.confirmFast-id',compact('datosActualizar','cantidadActualizar'));
+			return view('panel.importer.confirmFast-id',compact('datosActualizar','cantidadActualizar', 'paisesNoPermitidos', 'cPaisesNoPermitidos'));
 		}
 		/* ------------ UPDATE WITHOUT ID ------------ */
 		else {
 			/* ------------ UPDATE WITHOUT COORDINATES ------------ */
 			if( (!is_null($book['latitude']))  && (!is_null($book['longitude'])) ) {
-				return $this->preAddNoGeo($request);
+				return $this->preAddNoGeo($request, $userCountries);
 			}
 			/* ------------ UPDATE WITH COORDINATES ------------ */
 			else {
-				return $this->preAdd($request);
+				return $this->preAdd($request, $userCountries);
 			}
 		}
 	}
@@ -2562,18 +2616,35 @@ public function confirmAddWhitId(Request $request) {
 	return view('panel.importer.results-id',compact('datosActualizar','cantidadActualizar','datosBadActualizar','cantidadBadActualizar'));
 }
 
+public function existIn($userCountries, $country){
 
-public function preAddNoGeo(Request $request) {
+	$flag = false;
+
+	foreach($userCountries as $key => $value) {
+
+		if($value->nombre_pais == $country)
+			$flag = true;
+
+	}
+
+	return $flag;
+
+}
+
+public function preAddNoGeo(Request $request, $userCountries) {
 
 		$_SESSION['NuevosPaises']= array();
 		$_SESSION['NuevosProvincia']= array();
 		$_SESSION['NuevosPartido']= array();
 		$_SESSION['NuevosPlaces']= array();
 		$_SESSION['NuevosCiudades']= array();
+		$_SESSION['denied']= array();
+
 		$_SESSION['cPais']=0;
 		$_SESSION['cProvincia']=0;
 		$_SESSION['cPartido']=0;
 		$_SESSION['cCiudad']=0;
+		$_SESSION['cPaisesNoPermitidos']=0;
 
 	   	$tmpFile = Input::file('file')->getClientOriginalName();
 	   	$_SESSION['nombreFile'] = $tmpFile;
@@ -2581,8 +2652,11 @@ public function preAddNoGeo(Request $request) {
 
 	   	Storage::disk('local')->put($tmpFile, \File::get($request->file('file') ) );
 	   	//Cargo en memoria el csv para desp meterlo en la DB
-		Excel::load(storage_path().'/app/'.$tmpFile, function($reader){
+		Excel::load(storage_path().'/app/'.$tmpFile, function($reader) use ($userCountries){
 			foreach ($reader->get() as $book) {
+
+			// If country is allowed or is an adinistrator
+			if(($userCountries == "null") || (($userCountries != "null") && ($this->existIn($userCountries, $book->pais))) ) {
 
 				if($this->esIncompleto($book)){
 					continue;
@@ -2694,6 +2768,15 @@ public function preAddNoGeo(Request $request) {
 					};
 
 	            }// del else qe no es incompleto
+	        }// del if  de país permitido
+
+	        else{
+						// Verify that it is not already added
+	        	if(!in_array($book->pais, $_SESSION['denied'])){
+	        		array_push($_SESSION['denied'], $book->pais);
+	        		$_SESSION['cPaisesNoPermitidos']++;
+	        	}
+	        }
 			}//del for each
 		});//del exel::load
 		//Armo los datos para mostrar
@@ -2705,16 +2788,18 @@ public function preAddNoGeo(Request $request) {
 		$cantidadProvincia = $_SESSION['cProvincia'];
 		$cantidadPartido = $_SESSION['cPartido'];
 		$cantidadCiudad = $_SESSION['cCiudad'];
+		$cPaisesNoPermitidos = $_SESSION['cPaisesNoPermitidos'];
+		$paisesNoPermitidos = $_SESSION['denied'];
 		$nombreFile =  $_SESSION['nombreFile'];
 
-		return view('panel.importer.preview-ng',compact('nuevosPaises','nuevosProvincias','nuevosPartidos','nuevosCiudades','nombreFile','cantidadPais','cantidadProvincia','cantidadPartido', 'cantidadCiudad'));
+		return view('panel.importer.preview-ng',compact('nuevosPaises','nuevosProvincias','nuevosPartidos','nuevosCiudades','nombreFile','cantidadPais','cantidadProvincia','cantidadPartido', 'cantidadCiudad','paisesNoPermitidos', 'cPaisesNoPermitidos'));
 }
 //=================================================================================================================
 //=================================================================================================================
 //	RUTA PREVIEW, VISUALIZO LOS NUEVOS DATOS
 //=================================================================================================================
 //=================================================================================================================
-public function preAdd(Request $request) {
+public function preAdd(Request $request, $userCountries) {
 	// $request_params = $request->all();
 	// if ($request->hasFile('file'))
 	// 	$ext = $request->file('file')->getClientOriginalExtension();
@@ -2745,6 +2830,8 @@ public function preAdd(Request $request) {
 		$_SESSION['cProvincia']=0;
 		$_SESSION['cPartido']=0;
 		//$_SESSION['cCiudad']=0;
+		$_SESSION['denied'] = array();
+		$_SESSION['cPaisesNoPermitidos'] = 0;
 
 	   	$tmpFile = Input::file('file')->getClientOriginalName();
 	   	$_SESSION['nombreFile'] = $tmpFile;
@@ -2752,8 +2839,12 @@ public function preAdd(Request $request) {
 	   	session(['csvname' => $tmpFile]);
 	   	Storage::disk('local')->put($tmpFile, \File::get($request->file('file') ) );
 	   	//Cargo en memoria el csv para desp meterlo en la DB
-		Excel::load(storage_path().'/app/'.$tmpFile, function($reader){
+		Excel::load(storage_path().'/app/'.$tmpFile, function($reader) use ($userCountries){
 			foreach ($reader->get() as $book) {
+
+			// If country is allowed or is an adinistrator
+			if(($userCountries == "null") || (($userCountries != "null") && ($this->existIn($userCountries, $book->pais))) ) {
+
 				if($this->esIncompleto($book))
 					continue;
 				else{
@@ -2871,6 +2962,15 @@ public function preAdd(Request $request) {
 							// }
 			            } //del if (%LatLng)
 	            }// del else qe no es incompleto
+	        }// del if  de país permitido
+
+	        else{
+				// Verify that it is not already added
+	        	if(!in_array($book->pais, $_SESSION['denied'])){
+	        		array_push($_SESSION['denied'], $book->pais);
+	        		$_SESSION['cPaisesNoPermitidos']++;
+	        	}
+	        }
 			}//del for each
 		});//del exel::load
 		//Armo los datos para mostrar
@@ -2881,7 +2981,10 @@ public function preAdd(Request $request) {
 		$cantidadProvincia = $_SESSION['cProvincia'];
 		$cantidadPartido = $_SESSION['cPartido'];
 		$nombreFile =  $_SESSION['nombreFile'];
-		return view('panel.importer.preview',compact('nuevosPaises','nuevosProvincias','nuevosPartidos','nombreFile','cantidadPais','cantidadProvincia','cantidadPartido'));
+		$cPaisesNoPermitidos = $_SESSION['cPaisesNoPermitidos'];
+		$paisesNoPermitidos = $_SESSION['denied'];
+
+		return view('panel.importer.preview',compact('nuevosPaises','nuevosProvincias','nuevosPartidos','nombreFile','cantidadPais','cantidadProvincia','cantidadPartido', 'paisesNoPermitidos', 'cPaisesNoPermitidos'));
 
 }
 //=================================================================================================================
@@ -2898,10 +3001,13 @@ public function confirmAddNoGeo(Request $request){ //vista results, agrego a BD
 	$_SESSION['Descartados']= array();
 	$_SESSION['Incompletos']= array();
 
-   	//Cargo en memoria el csv para desp meterlo en la DB
-	Excel::load(storage_path().'/app/'.$request->fileName, function($reader){
+	$userCountries = $this->getCountriesAllowed();
 
+   	//Cargo en memoria el csv para desp meterlo en la DB
+	Excel::load(storage_path().'/app/'.$request->fileName, function($reader) use ($userCountries){
 		foreach ($reader->get() as $book) {
+
+			if(($userCountries == "null") || (($userCountries != "null") && ($this->existIn($userCountries, $book->pais))) ) {
 			// //cambio los SI, NO por 0,1
 
 			$book->condonesOri = $book->condones;
@@ -2951,8 +3057,8 @@ public function confirmAddNoGeo(Request $request){ //vista results, agrego a BD
 			elseif ($this->esNuevoNoGeo($book)){
 			    array_push($_SESSION['Nuevos'],$this->agregarNuevoNoGeo($book, $latLng));
 			}
-
-		}//del for each
+	   	 }//del if
+	  }//del for each
 	});//del exel::load
 	$datosNuevos = $_SESSION['Nuevos'];
 	$cantidadNuevos = sizeof($datosNuevos);
@@ -2983,9 +3089,14 @@ public function confirmAdd(Request $request){ //vista results, agrego a BD
 	$_SESSION['Descartados']= array();
 	$_SESSION['Incompletos']= array();
 
+	$userCountries = $this->getCountriesAllowed();
+
    	//Cargo en memoria el csv para desp meterlo en la DB
-	Excel::load(storage_path().'/app/'.$request->fileName, function($reader){
+	Excel::load(storage_path().'/app/'.$request->fileName, function($reader) use ($userCountries) {
 		foreach ($reader->get() as $book) {
+		
+		if(($userCountries == "null") || (($userCountries != "null") && ($this->existIn($userCountries, $book->pais))) ) {
+
 			$address = $book->calle;
 			if (is_numeric($book->altura))
 				$address = $address.' '.$book->altura;
@@ -3057,7 +3168,7 @@ public function confirmAdd(Request $request){ //vista results, agrego a BD
 			    array_push($_SESSION['Nuevos'],$this->agregarNuevo($book,$latLng));
 			}
 
-
+	   	 }//del if
 		}//del for each
 	});//del exel::load
 	$datosNuevos = $_SESSION['Nuevos'];

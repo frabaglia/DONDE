@@ -24,8 +24,7 @@
 
               <select class="rollSelect"
               ng-change="loadCity()"
-              ng-options="item.id as
-              item.nombre_partido for item in parties track by item.id"
+              ng-options="item.nombre_partido for item in parties"
               ng-model="selectedParty"
                 ng-disabled= '!partidoOn'
               material-select watch>
@@ -34,20 +33,35 @@
 
               <select class="rollSelect"
               ng-disabled= '!showCity'
-              ng-options="c.id as c.nombre_ciudad for c in cities track by c.id"
+              ng-options="c.nombre_ciudad for c in cities"
               ng-model="selectedCity" material-select watch>
               <option value="" disabled selected translate="select_city"></option>
               </select>
 
 <div class="row">
-      <div class="col s6">
-        <a  href="" ng-click="getNow()" class="waves-effect waves-light btn wow">
+      <div class="col s6" >
+
+        <a  ng-show='selectedCountry' href="" ng-click="getNow()" class="waves-effect waves-light btn wow"  >
         <i class="mdi-navigation-chevron-right right"></i>
         <i class="mdi-editor-format-list-bulleted left">
         </i><span translate="search_by_location"></span></a>
+
+
+        <a  ng-show='!selectedCountry' href="javascript:void(0);"  class="waves-effect waves-light btn wow"  >        	
+        <i class="mdi-navigation-chevron-right right"></i>
+        <i class="mdi-file-file-download left">
+        </i><span translate="search_by_location"></span></a>        
+
       </div>
-      <div class="col s6">
-        <a  href="" ng-click="activePlacesExport()" class="waves-effect waves-light btn wow">
+
+      <div class="col s6" >
+
+        <a  ng-show='selectedCountry' href="" ng-click="activePlacesExport()" class="waves-effect waves-light btn wow"  >
+		<i class="mdi-navigation-chevron-right right"></i>
+        <i class="mdi-file-file-download left">
+        </i><span translate="panel_actives_export_data"></span></a>
+
+        <a  ng-show='!selectedCountry' href="javascript:void(0);"  class="waves-effect waves-light btn wow"  >        	
         <i class="mdi-navigation-chevron-right right"></i>
         <i class="mdi-file-file-download left">
         </i><span translate="panel_actives_export_data"></span></a>
@@ -68,7 +82,7 @@
 <div class="ng-cloak stats" ng-cloak ng-hide="loadingPost">
  <div class="row" ng-hide="!places">
 
-  <h3 ng-if="optionMaster1" class="title"> <span translate="panel_actives_summary_1" translate-values="{places: '[[places.length]]'}"></span><strong> [[selectedCity || currentKey]] </strong>
+  <h3 ng-if="optionMaster1" class="title"> <span translate="panel_actives_summary_1" translate-values="{places: '[[places.length]]'}"></span><strong> [[selectedCity.nombre_ciudad || currentKey]] </strong>
     <a ng-if="places.length > 0" target="_self" href="panel/importer/front-export/[[selectedCountry.id]]/[[selectedProvince.id]]/[[selectedCity.id]]" ng-click="" class="waves-effect waves-light btn-floating red"><i class="mdi-file-file-download left"></i></a>
   </h3>
 
@@ -151,7 +165,7 @@
         <thead ng-cloak ng-hide="loadingPost">
           <tr>
            <th data-field="establecimiento" translate="establishment"></th>
-           <th data-field="nombre_localidad"><span translate="district"></span>, <span translate="state"></span>, <span translate="country"></span></th>
+           <th data-field="nombre_localidad"><span translate="panel_places_columntable_5">, </span><span translate="district"></span>, <span translate="state"></span>, <span translate="country"></span></th>
            <th data-field="direccion" translate="street_address"></th>
            <th data-field="" translate="services"></th>
            <th class="center-align" data-field="" translate="puntuation"></th>
@@ -161,28 +175,31 @@
        <tbody>
         <tr ng-cloak ng-hide="loadingPost" ng-repeat="place in filteredplaces">
           <td>[[place.establecimiento]]</td>
-          <td> [[place.barrio_localidad]] [[place.nombre_partido]], [[place.nombre_provincia]], [[place.nombre_pais]]</td>
-          <td>[[place.calle]] [[place.altura]] [[place.cruce]]</td>
+          <td> [[place.nombre_ciudad]], [[place.nombre_partido]], [[place.nombre_provincia]], [[place.nombre_pais]]</td>
+          <td ng-show='place.calle'>[[place.calle]] <span ng-show='place.altura'>[[place.altura]] </span><span ng-show='place.cruce' translate="and"> </span><span ng-show='place.cruce'> [[place.cruce]]</span></td>
+           <td ng-show='!place.calle' translate="without_address"></td>
           <td class="services2">
-            <img ng-show="place.condones" alt="Este lugar distribuye condones" src="images/iconos-new_preservativos-3.png">
-            <img ng-show="place.prueba" alt="Este lugar puede hacer prueba de HIV" src="images/iconos-new_analisis-3.png" >
-            <img ng-show="place.vacunatorio" alt="Este lugar cuenta con centro vacunatorio" src="images/iconos-new_vacunacion-3.png">
-            <img ng-show="place.infectologia" alt="Este lugar cuenta con centro de infectologia" src="images/iconos-new_atencion-3.png" >
-            <img ng-show="place.mac" alt="Este lugar cuenta con Servicios de Salud Sexual y Reproductiva" src="images/iconos-new_sssr-3.png" >
-            <img ng-show="place.ile" alt="Este lugar cuenta con centro de Interrupcion Legal del Embarazo" src="images/iconos-new_ile-3.png" >
-            <img ng-show="place.ssr" alt="Este lugar cuenta con Servicios de Salud Sexual y Reproductiva" src="images/iconos-new_sssr-3.png" >
-            <img ng-show="place.dc" alt="Este lugar cuenta con centro de Detección de Cancer" src="images/iconos-new_ile-3.png" >
+            <img ng-show="place.condones" alt="Este lugar distribuye condones" src="images/condones.svg">
+            <img ng-show="place.prueba" alt="Este lugar puede hacer prueba de HIV" src="images/vih.svg" >
+            <!--img ng-show="place.vacunatorio" alt="Este lugar cuenta con centro vacunatorio" src="images/iconos-new_vacunacion-3.png" -->
+            <!--img ng-show="place.infectologia" alt="Este lugar cuenta con centro de infectologia" src="images/iconos-new_atencion-3.png" -->
+            <img ng-show="place.mac" alt="Este lugar cuenta con Servicios de Salud Sexual y Reproductiva" src="images/mac.svg" >
+            <img ng-show="place.ile" alt="Este lugar cuenta con centro de Interrupcion Legal del Embarazo" src="images/ile.svg" >
+            <img ng-show="place.ssr" alt="Este lugar cuenta con Servicios de Salud Sexual y Reproductiva" src="images/salud.svg" >
+            <img ng-show="place.dc" alt="Este lugar cuenta con centro de Detección de Cancer" src="images/deteccion.svg" >
           </td>
 
           <td class="center-align services2">
             <div class="row" ng-show="[[place.cantidad_votos]]">
 
-              <div class="col s12">
+              <!--div class="col s12">
                 <img class="panel-evaluation-activos" alt="" src="images/emojis/[[place.rate]]active.png">
-              </div>
+              </div-->
 
               <div class="col s12 evaluation-panel-count">
-                [[place.cantidad_votos]] <span translate="evaluation_plural"></span>
+                [[place.cantidad_votos]] 
+                <span ng-show='place.cantidad_votos > 1' translate="evaluation_plural"></span>
+                <span ng-show='place.cantidad_votos == 1' translate="evaluation_singular"></span>
               </div>
 
             </div>

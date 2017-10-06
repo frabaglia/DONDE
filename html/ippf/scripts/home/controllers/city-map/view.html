@@ -24,14 +24,19 @@
   <div class="detail row wow fadeIn fadeInRight" ng-cloak ng-show="currentMarker">
 
     <h4>[[currentMarker.establecimiento]] </h4>
-    <p><b>[[currentMarker.calle]] [[currentMarker.altura]]
-      <span ng-show='currentMarker.cruce' translate="and"></span> <span ng-show='currentMarker.cruce'>[[currentMarker.cruce]]<br></span>
-      <span ng-show='currentMarker.piso_dpto'> [[currentMarker.piso_dpto]]<br></span>
-      [[currentMarker.barrio_localidad]]
-      <p ng-show="currentMarker.tipo">
-        <strong><span>[[currentMarker.tipo]]</span> </strong>
-      </p>
-    </b>
+    <p>
+      <b>[[currentMarker.calle]] [[currentMarker.altura]]
+        <span ng-show='currentMarker.cruce && item.calle' translate="and"></span>
+        <span ng-show='currentMarker.cruce'>[[currentMarker.cruce]]<br></span>
+        <span ng-show='currentMarker.piso_dpto'> [[currentMarker.piso_dpto]]<br></span>
+        <!--span ng-show='currentMarker.barrio_localidad'>[[currentMarker.barrio_localidad]]<br></span-->
+      </b>
+    </p>
+    <span ng-show="currentMarker.tipo">
+      <strong><span>[[currentMarker.tipo]]</span> </strong>
+    </span>
+
+
 
 
 

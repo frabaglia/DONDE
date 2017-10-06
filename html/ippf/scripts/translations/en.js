@@ -35,8 +35,8 @@ var translations_en =
    "loading_label": "Loading",
    "resultado_cantidad_titulo>1": "There are [[cantidad]] places nearby",
    "resultado_cantidad_titulo=1": "There is 1 place nearby",
-   "friendly_service_label": "youth friendly service",
-   "only_teenager_friendly": "youth friendly services only",
+   "friendly_service_label": "Youth friendly service",
+   "only_teenager_friendly": "Youth friendly services only",
    "footer_text": "Vamos is a <b>collaborative platform.</b> If you find any error with the platform's data or operating functionality, please send us a <a href=\"mailto:vamoslacapp@gmail.com\"  target=\"_self\">message</a>.",
    "sort_label_text": "Sort:",
    "sort_closest_option": "Closest",
@@ -370,7 +370,7 @@ var translations_en =
    "Cáncer_name_ titulo": "Where can I find breast cancer and cervical cancer screening services in {{name_country}}. {{name_state}}, {{name_city}}?",
    "ssr_name_titulo": "Where can I find sexual and reproductive health services in {{name_country}}. {{name_state}}, {{name_city}}?",
    "adol_desc_short": "Find youth friendly services nearby.",
-   "adol_name": "youth friendly services",
+   "adol_name": "Youth friendly services",
    "seo_select_city": "Select a City",
    "there_are_xx_places": "There are <strong class=\"orange-c\"> [[count]] </strong> places.",
    "there_are_one_place": "There is one place.",
@@ -454,7 +454,7 @@ var translations_en =
    "tyc_description_8" : "If you have any questions, you can contact IPPF/WHR and Fundación Huésped at ",
    "terms" : "Terms & Conditions",
    "install" : "Install App",
-   
+
    "establishments_not_found_result_label": "No nearby establishments were found",
    "spinner_sending_evaluation_label": "Submitting evaluation",
    "spinner_getting_coordenates_label": "Getting coordinates",
@@ -535,6 +535,7 @@ var translations_en =
    "back": "Back",
    "noCities": "There are no cities listed for [[partido]]",
    "noResults": "",
+   "noILE": "In [[pais]] is prohibited under all circumstances. For more information, visit www.safe2choose.org",
    "point": "[[rate]] point",
    "ile_argentina": "In Argentina abortion is legal under certain circumstances. You can access comprehensive legal abortion counseling and services at the following clinics.",
    "ile_bolivia": "In Bolivia abortion is legal under certain circumstances. In cases permitted by law you can access comprehensive legal abortion services at the following clinics.",
@@ -606,5 +607,6 @@ var translations_en =
    "evaluation_4": "Contraceptive methods",
    "evaluation_5": "Safe abortion",
    "evaluation_6": "Cancer screening",
-   "evaluation_7": "Sexual and reproductive health services"
+   "evaluation_7": "Sexual and reproductive health services",
+   "app-down": "Download Android app"
  }

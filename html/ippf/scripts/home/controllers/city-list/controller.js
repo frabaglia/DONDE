@@ -51,22 +51,32 @@ dondev2App.controller('cityListController',
         $scope.countryImageTag = removeAccents($scope.countryImageTag);
 
         if ($scope.service.code == 'ile'){
-           if($scope.countryImageTag == 'antiguaandbarbuda' || $scope.countryImageTag == 'aruba' || $scope.countryImageTag == 'curacao' || $scope.countryImageTag == 'dominica' || $scope.countryImageTag == 'jamaica' || $scope.countryImageTag == 'honduras' || $scope.countryImageTag == 'grenada' || $scope.countryImageTag == 'suriname' || $scope.countryImageTag == 'saintvincent'|| $scope.countryImageTag == 'paraguay'|| $scope.countryImageTag == 'panama' || $scope.countryTextTag =='trinidadandtobago'){
-
+           if(
+             ($scope.countryImageTag == 'antiguaandbarbuda') ||
+             ($scope.countryImageTag == 'aruba') ||
+             ($scope.countryImageTag == 'curacao') ||
+             ($scope.countryImageTag == 'dominica') ||
+             ($scope.countryImageTag == 'jamaica') ||
+             ($scope.countryImageTag == 'honduras') ||
+             ($scope.countryImageTag == 'grenada') ||
+             ($scope.countryImageTag == 'suriname') ||
+             ($scope.countryImageTag == 'saintvincent') ||
+             ($scope.countryImageTag == 'paraguay') ||
+             ($scope.countryImageTag == 'panama') ||
+             ($scope.countryTextTag =='trinidadandtobago'))
+             {
           $scope.legal = false;
-
         }
         }
         else{
           $scope.legal = true;
         }
-       
-      
 
         $scope.ileTag = "ile_" + $scope.countryImageTag;
         $scope.notLegal = "ile_legal_"+ $scope.countryImageTag;
         $scope.countryTextTag = "countryText_" + $scope.countryImageTag;
         console.log("$scope.countryImageTag " + $scope.countryImageTag);
+        console.log("$scope.legal " + $scope.legal);
 
       }
 
@@ -83,7 +93,7 @@ dondev2App.controller('cityListController',
       }
 
       $scope.loading = false;
-      
+
     })
 
     $scope.nextShowUp = function(item) {
@@ -165,7 +175,7 @@ dondev2App.controller('cityListController',
 
       $location.path('/' + $scope.country + '/' +
         $scope.province + '/' +
-        $scope.city + '/' +   
+        $scope.city + '/' +
         $scope.ciudad + '/' +
         $routeParams.servicio + '/mapa');
 

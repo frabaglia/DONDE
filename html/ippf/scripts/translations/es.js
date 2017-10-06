@@ -535,6 +535,7 @@ var translations_es =
    "back": "Volver",
    "noCities": "No hay registros de ciudades para [[partido]]",
    "noResults": "No tenemos registrados lugares de entrega gratuita de Condones en [[ciudad]]",
+   "noILE": "En [[pais]] el aborto está prohibido en cualquier circunstancia. Para más información, puedes visitar www.safe2choose.org",
    "point": "[[rate]] punto",
    "ile_argentina": "En Argentina el aborto es legal bajo ciertas circunstancias. Puedes acceder a consejería y servicios integrales de interrupción legal de embarazo en las siguientes clínicas.",
    "ile_bolivia": "En Bolivia el aborto es legal bajo ciertas circunstancias. En los casos permitidos por ley podrás acceder a servicios integrales de interrupción legal de embarazo en las siguientes clínicas.",
@@ -606,5 +607,7 @@ var translations_es =
    "evaluation_4": "Métodos anticonceptivos",
    "evaluation_5": "Interrupción Legal del Embarazo",
    "evaluation_6": "Detección de Cáncer",
-   "evaluation_7": "Servicios de Salud Sexual y Reproductiva"
+   "evaluation_7": "Servicios de Salud Sexual y Reproductiva",
+   "app-down": "Descarga la aplicación para Android"         
+
  }

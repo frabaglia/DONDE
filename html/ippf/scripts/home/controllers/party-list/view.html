@@ -8,7 +8,7 @@
             <span ng-cloak ng-show="service">
             <a style="cursor: default;" translate="searching_service" translate-values="{service: '[[service.label]]' }"></a>
             </span>
-            
+
         </p>
 
             <span ng-cloak ng-show="country">
@@ -16,7 +16,7 @@
             </span>
 
         </p>
-              
+
         <div ng-cloak ng-show="loading">
 
             <h1 translate="loading_cities"> </h1>
@@ -30,16 +30,19 @@
         </div>
 
         <div class="" ng-cloak ng-hide="loading">
-            
+
                <div ng-cloak ng-show='legal'>
                 <img class="country-image" src="images/countries/[[countryImageTag]].jpg"></img>
              <div  ng-cloak ng-hide="loading" class="member-container">
                 <p  id='ile_text' ng-cloak><span  translate="[[countryTextTag]]"></span></p>
             </div>
 
-                <p ng-cloak ng-show="service.title == 'ile_name'"><span translate="[[ileTag]]"></span></p>
+                <!-- <p ng-cloak ng-show="service.title == 'ile_name'"><span translate="[[ileTag]]"></span></p> -->
             </div>
-            
+            <div ng-cloak ng-show='!legal'>
+              <h5 translate="[[ileTag]]"></h5>
+            </div>
+
             <h4 ng-cloak ng-show="cantidad > 1" translate="resultado_cantidad_titulo>1" translate-values="{cantidad: '[[cantidad]]'}"></h4>
 
             <h4 ng-cloak ng-show="cantidad == 1" translate="resultado_cantidad_titulo=1"></h4>
@@ -108,8 +111,8 @@
                             <div class="col s6 l8">
 
                                 <i ng-show='item.calle' class="mdi-maps-place tiny"> </i>
-                                
-                                <span class="address" ng-cloak ng-show="item.calle || item.altura || item.cruce">[[item.calle]] [[item.altura]] 
+
+                                <span class="address" ng-cloak ng-show="item.calle || item.altura || item.cruce">[[item.calle]] [[item.altura]]
                                     <span ng-show='item.cruce'> <span translate="and"></span>
                                     <span ng-show='item.cruce'> [[item.cruce]]<br></span>
                                     <span ng-show='item.piso_dpto'>
@@ -201,7 +204,7 @@
                     <a ng-href="#/localizar/[[service]]/listado" class="waves-effect waves-light btn" data-wow-delay="0s" translate="search">
                     <i class="mdi-navigation-chevron-right right"></i>
                     <i class="mdi-device-gps-fixed left"></i></a>
-                
+
                 </div>
 
             </div>
@@ -211,7 +214,7 @@
 
     </div>
 
-</div>    
+</div>
 
 <div class="row home-footer-wrapper">
 
@@ -222,6 +225,3 @@
     </footer>
 
 </div>
-
-
-                       

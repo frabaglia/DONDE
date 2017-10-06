@@ -24,14 +24,11 @@
   <div class="detail row wow fadeIn fadeInRight" ng-cloak ng-show="currentMarker">
 
     <h4>[[currentMarker.establecimiento]] </h4>
-    <p><b>[[currentMarker.calle]] [[currentMarker.altura]] 
+    <p><b>[[currentMarker.calle]] [[currentMarker.altura]]
       <span ng-show='currentMarker.cruce' translate="and"></span> <span ng-show='currentMarker.cruce'>[[currentMarker.cruce]]</span><br>
-      <!--span ng-show='currentMarker.piso_dpto' translate="form_establishment_floor"></span--> 
-      <span ng-show='currentMarker.piso_dpto'> [[currentMarker.piso_dpto]]</span><br> 
+      <span ng-show='currentMarker.piso_dpto'> [[currentMarker.piso_dpto]]</span><br>
       [[currentMarker.barrio_localidad]]
-      <!--span ng-show="currentMarker.provincia_region"> ,</span> [[currentMarker.nombre_provincia]]</p-->
       <p ng-show="currentMarker.tipo">
-        <!--span translate="form_establishment_type"></span-->
         <strong><span>[[currentMarker.tipo]]</span> </strong>
       </p>
     </b>
@@ -107,7 +104,7 @@
                     <p ng-cloak ng-show="currentMarker.cantidad_votos == 1" class="evaluation-votes">[[currentMarker.cantidad_votos]] Evaluación</p>
                   </div>
                   <div class="col s4">
-        				
+
         				<div style="padding:1.5%; border-radius: 5px ;background-color: #E6344D; color: #fff;font-weight: 800">
                             <span translate="point" translate-values="{ rate: '[[currentMarker.rate]]'}">
                             </span><span ng-show='currentMarker.rate > 1'>s</span>

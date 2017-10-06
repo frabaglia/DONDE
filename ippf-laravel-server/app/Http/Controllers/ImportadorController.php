@@ -4058,8 +4058,9 @@ public function agregarActualizar($book){
 	}
 	public function correctValueService($old,$new){
 		 $resu = 999;
-		 if (trim($new) == "NO") $new = 0;
-		 if (trim($new) == "SI") $new = 1;
+		 $new = trim($new);
+		 if ($new == "NO") $new = 0;
+		 if ($new == "SI" || $new == "si" || $new == "Si") $new = 1;
 
 
 		 if (is_null($new)) {//si nuevo esta vacio no perder el viejo

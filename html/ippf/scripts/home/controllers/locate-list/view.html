@@ -43,15 +43,20 @@
 			</div>
 
 		</div>
-		
+
 			 <div ng-cloak ng-show='legal'>
                 <img class="country-image" src="images/countries/[[countryImageTag]].jpg"></img>
              <div  ng-cloak ng-hide="loading" class="member-container">
                 <p  id='ile_text' ng-cloak><span  translate="[[countryTextTag]]"></span></p>
             </div>
 
-                <p ng-cloak ng-show="service.title == 'ile_name'"><span translate="[[ileTag]]"></span></p>
+                <!-- <p ng-cloak ng-show="service.title == 'ile_name'"><span translate="[[ileTag]]"></span></p> -->
             </div>
+
+						<div ng-cloak ng-show='!legal'>
+			        <h5 translate="[[ileTag]]"></h5>
+			      </div>
+						
 		<h4 ng-cloak ng-show="cantidad > 1" translate="resultado_cantidad_titulo>1"  translate-values="{ cantidad: '[[cantidad]]'}"> </h4>
 
 		<h4 ng-cloak ng-show="cantidad == 1" translate="resultado_cantidad_titulo=1"> </h4>
@@ -98,12 +103,11 @@
 						<div class="col s12 l8">
 
 							<i ng-show='item.calle' class="mdi-maps-place tiny"> </i>
-							
-                            <span class="address" ng-cloak ng-show="item.calle || item.altura || item.cruce">[[item.calle]] [[item.altura]] 
+
+                            <span class="address" ng-cloak ng-show="item.calle || item.altura || item.cruce">[[item.calle]] [[item.altura]]
                                     <span ng-show='item.cruce'> <span translate="and"></span>
                                     <span ng-show='item.cruce'> [[item.cruce]]<br></span>
-                                    <span ng-show='item.piso_dpto'>
-                                    <!--span translate="form_establishment_floor"></span-->[[item.piso_dpto]] </span><br>
+                                    <span ng-show='item.piso_dpto'>[[item.piso_dpto]]<br></span>
                                     <span ng-show='item.barrio_localidad'> [[item.barrio_localidad]]<br></span>
                                 </span>
 
@@ -186,4 +190,3 @@
     </footer>
 
 </div>
-

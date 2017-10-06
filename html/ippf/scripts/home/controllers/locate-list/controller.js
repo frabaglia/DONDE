@@ -287,7 +287,7 @@ dondev2App.controller('locateListController',
 
                 $scope.ileTag = "ile_" + $scope.countryImageTag;
                 $scope.countryTextTag = "countryText_" + $scope.countryImageTag;
-                
+
                 console.log("countryTextTag " + $scope.countryTextTag);
 							});
 					}

@@ -1584,3 +1584,36 @@ div.list div.label {
 .progress .indeterminate {
     background-color: #e6642f;
 }
+
+#suggest .col.s3.m3
+{    border: 1px rgba(128, 128, 128, 0.25) solid;
+    border-radius: 25px;
+    box-shadow: 1px 1px 1px 1px rgba(136, 136, 136, 0.23);
+}
+#suggest .btn{
+  border: 1px rgba(128, 128, 128, 0.25) solid;
+    border-radius: 25px;
+    box-shadow: 1px 1px 1px 1px rgba(136, 136, 136, 0.23);
+    color:#ed2840;
+    background:white;
+}
+
+#suggest p {
+    margin: 0;
+    padding: 0;
+    color:#ed2840;
+}
+#suggest .card {
+    padding: 1em;
+}
+
+#suggest .card .card-title {
+  font-weight: 900;
+    font-size: 0.9em;
+}
+#suggest span.grey-text  {
+    font-weight: 100;
+    font-size: 0.9em;
+    color: #ed2840 !important;
+}
+

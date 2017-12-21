@@ -1,0 +1,107 @@
+<!-- Include the JS ReCaptcha API -->
+<script src="//www.google.com/recaptcha/api.js?render=explicit&onload=vcRecaptchaApiLoaded" async defer></script>
+
+<!-- Include the ngReCaptcha directive -->
+<script src="bower_components/angular-recaptcha/release/angular-recaptcha.js"></script>
+
+<link rel="stylesheet" href="css/adhoc.css">
+
+<div class="home full new-home">
+
+  <div class="fadeIn fadeInRight container">
+
+    <br><h4 >[[establecimiento]]</h4>
+    <p><b translate="rate_this_place"></b> </p>
+    <p translate="evaluation_required_label"></p>
+
+    <form>
+
+      <!-- start-block -->
+      <div class="block">
+
+        <p class="blockTitle">
+          <div mi-service></div>
+        </p> 
+
+        <p class="blockContent">
+          <select class="blockContent browser-default right-alert" ng-model="selectedService" ng-change="selectedServiceChange()" id="serviceselectbox">
+            <option value="" default selected translate="evaluation_selectservice_optionlabel"></option>
+            <option ng-repeat="service in services" ng-value="[[service.id]]" translate="[[service.shortname | lowercase]]_name">
+              
+            </option>
+          </select>
+        </p>
+
+      </div>
+
+      <div id="evaluation" class="evaluation"></div>
+      <!-- de evaluacion -->
+
+      <!-- start-block comments-->
+      <div class="block">
+
+        <div>
+          <p class="blockTitle"><span translate="evaluation_question_15"></span> <span ng-if="comment.Comment.body.length >= 200" style="color: #e6642f;" translate="evaluation_maxcomments_label"></span> </p>
+        </div>
+
+        <textarea ng-model="respuestas.comments" name="comment[Comment][body]" maxlength="500" id="comments" type="text" placeholder="Máximo de 500 caracteres" class="blockContentComment required">
+        </textarea>
+
+      </div>
+
+      <div class="block">
+
+        <div>
+          <p class="blockTitle"><span translate="evaluation_question_14"></span></p>
+        </div>
+
+        <input type="text" maxlength="100" ng-model="name" name="name" maxlength="100" id="name" placeholder="tunombre" class="blockContentComment">
+        <label for="name" translate="name"></label>
+
+        <input type="email" ng-model="email" name="email" maxlength="200" id="email" placeholder="example@example.com" class="blockContentComment">
+        <label for="email">email</label>
+
+        <input type="tel" ng-model="tel" name="tel" maxlength="50" id="tel" class="blockContentComment">
+        <label for="tel" translate="tel"></label>
+
+      </div>
+
+      <div class="block">
+
+        <!-- start-block buttons -->
+        <div vc-recaptcha theme="'light'" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()"></div>
+
+      </div>
+
+      <div class="block">
+
+        <!-- start-block buttons --> 
+        <div class="blockButtons">
+
+          <div class="col s7" style="padding-left: 0px !important; padding-right: 0px !important;">
+            <button ng-disabled="!validForm" ng-click="clicky(evaluation)" class="waves-effect waves-light btn blockSender" translate="evaluation_sendcalification_button_label"></button>
+          </div>
+
+          <div class="col s5">
+            <a href="javascript:history.back()" class="waves-effect waves-light btn blockSender" style="background-color: #9F9F9F;" translate="cancel"></a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </form>
+    
+  </div>
+
+</div>
+
+<div class="row home-footer-wrapper">
+
+    <footer class="result-service-footer">
+
+        <p translate="footer_text"></p>
+
+    </footer>
+
+</div>

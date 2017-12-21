@@ -1,0 +1,12 @@
+footer{
+
+    background-color: $black;
+	&.page-footer{
+    	margin-top: 0px;
+    	padding-top: 0px;
+		font-size:0.75em;
+		text-align: center;
+		color: $white;
+		background-color: $black;
+	}
+}

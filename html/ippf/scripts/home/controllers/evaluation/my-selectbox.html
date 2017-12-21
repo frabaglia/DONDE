@@ -1,0 +1,10 @@
+<!-- start-block -->
+<div class="block">
+  <p class="blockTitle">[[actualQuestion.body]]</p>
+  <div class="blockContent ">
+    <input ng-repeat="option in actualQuestion.options" ng-model="actualQuestion.selectedResponse" class="with-gap" name="group1" type="radio" id="privacidad_Si" value="1"  ng-change="formChange()"/>
+    <label for="privacidad_Si">Sí</label>
+    <input ng-model="evaluation.info_ok" class="with-gap" name="group1" type="radio" id="privacidad_No" value="0"  ng-change="formChange()"/>
+    <label for="privacidad_No">No</label>
+  </div>
+</div>

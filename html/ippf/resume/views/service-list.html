@@ -1,0 +1,70 @@
+<ul class="collection">
+
+		<li class="collection-item collection-seo">
+
+			<div class="row valign">
+
+				<div class="row left-align">
+
+					<span>
+
+            <b class="text-seo">[[nameCountry]]</b> -
+            <b class="text-seo">[[nameProvince]]</b> -
+            <b class="text-seo">[[nameParty]]</b> -
+            <b class="text-seo">[[nameCity]]</b>
+
+          </span>
+
+				</div>
+
+			</div>
+
+		</li>
+
+		<li class="collection-item collection-seo">
+
+			<div class="row valign ">
+
+				<div class="Aligner-seo">
+
+					<div class="Aligner-item Aligner-item--top"><i class="mdi-hardware-keyboard-arrow-down i-seo"></i></div>
+
+					<div class="Aligner-item"><span translate="seo_services_whatareyoulookingfor_label"><b></b></span></div>
+
+				</div>
+
+			</div>
+
+		</li>
+
+    <div class="icon-seo">
+
+      <div class="">
+
+        <table class="highlight centered">
+
+          <div class="row">
+
+           <!-- @foreach ($allElements as $key => $service)-->
+            <div class="col s6 m6 l6 grid-seo" ng-repeat='s in services'>
+
+              <a class="services-seo" href="#/pais/[[nameCountry]]/provincia/[[nameProvince]]/partido/[[nameParty]]/ciudad/[[nameCity]]/servicio/[[s.code]]">
+
+                <div class="center promo">
+                 <img width="70px" src="resume/images/[[s.icon]]">
+                 <p class="item-seo" translate="[[s.title]]"></p>
+               </div>
+
+             </a>
+             
+           </div>
+
+         </div>
+
+       </div>
+
+     </div>
+
+   </ul>
+
+ </div>

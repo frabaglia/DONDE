@@ -1,0 +1,87 @@
+
+  <div ng-show = 'cPlaces > 0 'class="result-seo">
+
+    <div ng-show='cPlaces == 1' class="Aligner">
+
+      [[cPlaces]]&nbsp;<span translate="preCopyFoundSingle" translate-values="{  'service'  : '[[serviceCode]]'}">
+
+    </div>
+
+    <div ng-show='cPlaces > 1' class="Aligner">
+
+     [[cPlaces]]&nbsp; <span translate="preCopyFound" translate-values="{  'service'  : '[[serviceCode]]'}"></span> 
+
+    </div>    
+
+
+    <div class="Aligner">
+      <div class="Aligner-item Aligner-item--top"><img width="50px" src="/images/{{$resu['icon']}}"></div>
+      <div class="Aligner-item">
+        <b><span class="text-seo">[[nameCity]]</span>, <span class="text-seo">[[nameParty]]</span>, <span class="text-seo">[[nameProvince]]</span>, <span class="text-seo">[[nameCountry]]</span></b>
+      </div>
+    </div>
+
+</div>
+
+<div ng-show ='cPlaces > 0' class="container">
+	<table class="striped" >
+		<thead>
+			<th translate="street_address"></th>
+			<th translate="place"></th>
+			<th translate="schedule"></th>
+			<th translate="responsable"></th>
+			<th translate="tel"><th>
+		</thead>
+		<tbody>
+			<tr ng-repeat='p in places'>
+
+            <td ng-show='!p.altura'><a class="item-seo" ng-href="share/[[p.placeId]]">[[p.calle]] [[p.altura]]</a></td>
+				  <td ng-show='p.altura' ><a class="item-seo" ng-href="share/[[p.placeId]]">[[p.calle]] Sin número</a></td>
+  
+				<td><a class="item-seo" ng-href="share/[[p.placeId]]">[[p.establecimiento]]</a></td>
+				<td><a class="item-seo" ng-href="share/[[p.placeId]]">[[p.horario]]</a></td>
+				<td><a class="item-seo" ng-href="share/[[p.placeId]]">[[p.responsable]]</a></td>
+				<td><a class="item-seo" ng-href="share/[[p.placeId]]">[[p.telefono]]</a></td>
+			</tr>
+
+		</tbody>
+
+	</table>
+</div>
+
+<br>
+<div ng-show ='cPlaces > 0' class="container option-seo">
+    <div class="centrada-seo">
+      <a href="form" class="waves-effect waves-light btn btn-seo" >
+        <i class="mdi-navigation-chevron-right right"></i>
+        <i class="mdi-content-add-circle left" ></i><span translate="suggest_place"></a>
+      </div>
+    </div>
+
+
+  <div ng-show='cPlaces == 0' class="result-seo">
+    <div class="Aligner">
+      <span translate="preCopyNotFound" translate-values="{ 'service' : '[[serviceCode]]' , 'city' : '[[nameCity]]'}"> 
+
+    <div class="Aligner">
+      <div class="Aligner-item">
+        <span class="text-seo"><b>[[nameParty]]</span>, <span class="text-seo">[[nameProvince]]</span></b>
+      </div>
+    </div>
+
+
+</div>
+
+<div class="container option-seo">
+	<div class="centrada-seo">
+		<a href="listado-paises#/" class="waves-effect waves-light btn btn-seo">
+			<i class="mdi-navigation-chevron-right right"></i>
+			<i class="mdi-action-search left" ></i><span translate="seo_placeslist_new_search"></a>
+		</div>
+
+		<div class="centrada-seo">
+			<a href="form" class="waves-effect waves-light btn btn-seo" >
+				<i class="mdi-navigation-chevron-right right"></i>
+				<i class="mdi-content-add-circle left"></i><span translate="suggest_place"></span></a>
+			</div>
+		</div>

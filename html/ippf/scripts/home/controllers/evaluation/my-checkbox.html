@@ -1,0 +1,9 @@
+<div class="block">
+<p class="blockTitle">[[ actualQuestion.body ]]</p>
+  <p class="blockContent" ng-repeat="option in actualQuestion.options track by $index">
+    <input type="checkbox" name="[[::actualQuestion.id]]"  id="[[actualQuestion.id]][[option.id]]" value="option.id" ng-model="respuestas"  ng-change="responseChange()"/>
+      <label for="[[actualQuestion.id]][[option.id]]">[[cont]]</label>
+  </p>
+</div>
+<br>
+  

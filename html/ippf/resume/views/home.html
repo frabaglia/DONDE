@@ -1,0 +1,60 @@
+
+<div class="container resume ">				
+	<div class="row" >
+	
+		<div class="col s12 m6 wow bounceInLeft ">
+			<div class="col s12 top" ng-cloak ng-hide="currentMarker">
+				<h5 ng-show='data.length > 1' translate="there_are_xx_places" translate-values="{count: '[[data.length]]' }"> </h5>
+				<h5 ng-show='data.length == 1' translate="there_are_one_places" translate-values="{count: '[[data.length]]' }"> </h5>
+				<h5 ng-show='data.length == 0' translate="there_are_no_places" translate-values="{count: '[[data.length]]' }"> </h5>								
+				<p class="orange-c" translate="choose_one"> </p>
+			</div>
+			<div ng-cloak ng-hide="currentMarker">
+						<div class="col s6">
+							<h5><strong translate="country"> </strong> </h5>
+						</div>
+						<div class="col s6">
+							<h5><strong translate="center">  </strong> </h5>
+						</div>
+				<div ng-repeat="c in ranking">
+					<div class="col s6">
+					 <p><a ng-href="#/pais/[[c.id]]-[[c.nombre_pais]]/provincia">[[c.nombre_pais]] </a> </p>
+					</div>
+					<div class="col s6">
+					 <p><strong>[[c.lugares]] </strong></p>
+					</div>
+				</div>
+			</div>	
+			<div ng-cloak ng-show="currentMarker" ng-include="'resume/views/detalle.html'"></div>
+			  
+		</div>
+		<div class="col s12 m6  wow bounceInRight">
+			<ng-map id="mainMap"
+            zoom-to-include-markers="auto"
+            default-style="true">
+			   <marker 
+			   	  	icon="images/place-off.png"
+			   		ng-repeat="p in data"
+			   		on-click="showDetail(p)"
+              		position="[[p.latitude]],[[p.longitude]]">
+			    </marker>
+			   </ng-map>
+		</div>
+
+
+	</div>
+</div>
+
+<div class="container">
+    <div class="row">
+      <div class="col s0 m3 wow bounceInRight">
+         <p>  <p>
+      </div>
+      <div class="col s12 m6 wow bounceInRight">
+        <a href="listado-detalle" class="waves-effect waves-light btn wow" translate="search">
+          <i class="mdi-navigation-chevron-right right"></i>
+          <i class="mdi-editor-format-list-bulleted left"></i>
+        </a>
+      </div>
+      </div>
+  </div>

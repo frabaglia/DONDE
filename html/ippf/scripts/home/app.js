@@ -102,7 +102,23 @@ config(['$routeProvider', function($routeProvider) {
   }]);
 
 
-dondev2App.run(function($rootScope, $timeout, $location) {
+dondev2App.run(function($rootScope, $timeout, $location,$translate) {
+  var userLang = navigator.language || navigator.userLanguage; // es-AR
+      var userLang = userLang.split('-')[0]; // es
+      if (userLang !== 'undefined' && userLang.length > 0 && userLang != null && (!localStorage.selectedByUser)) {
+        if (userLang == 'pt') userLang = 'br';
+        localStorage.setItem("lang", userLang);
+        localStorage.setItem("selectedByUser", false);
+        $translate.use(userLang);
+        $rootScope.selectedLanguage = userLang;
+      } else if (typeof localStorage.lang !== "undefined") {
+        $translate.use(localStorage.getItem("lang"));
+        $rootScope.selectedLanguage = localStorage.lang;
+      } else {
+        localStorage.setItem("lang", 'es');
+        $translate.use('es');
+        $rootScope.selectedLanguage = 'es';
+      }
   $rootScope.$on("$routeChangeStart", function(event, next, current) {
     var url = $location.url();
     if (url.includes("como-buscas")) {

@@ -617,5 +617,8 @@ var translations_es =
    "confirm_description" : "La evaluación será removida definitivamente.",
    "busqueda_name_titulo" : "Ingresar nombre del lugar o dirección " ,
    "busqueda_name_desc" : "Buscar a partir del nombre de un establecimiento o su dirección" ,
-
+   "useful_info" : "Información útil" ,
+   "nearby_locations" : "Lugares cercanos" ,
+   "suggest_new_place" : "Sugerir nuevo lugar" ,
+   "places_lists_mundito" : "Ver todos los lugares" ,
  }

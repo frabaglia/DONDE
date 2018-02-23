@@ -617,5 +617,8 @@ var translations_en =
    "confirm_description" : "This evaluation will be remove definitely.",
    "busqueda_name_titulo" : "Enter place name or address" ,
    "busqueda_name_desc" : "Search a place by it's name or address" ,
-
+   "useful_info" : "Useful information" ,
+   "nearby_locations" : "Nearby locations" ,
+   "suggest_new_place" : "Suggest a new place" ,
+   "places_lists_mundito" : "See all places" ,
  }

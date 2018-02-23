@@ -12,7 +12,7 @@
     <meta property='og:locale' content='es_LA'/>
     <meta property='og:title' content='VAMOS'/>
     <meta property="og:description" ccontent="{{$p->establecimiento}} en {{$p->nombre_ciudad}}, {{$p->calle}} {{$p->altura}}  ">
-    <meta property='og:url' content='https://vamoslac.org/share/{{$lang}}/{{$p->placeId}} '/>
+    <meta property='og:url' content='https://vamoslac.org/share/{{$lang}}/{{$p->placeId}}'/>
     <meta property='og:site_name' content="Vamos a ver que hace"/>
     <meta property='og:type' content='website'/>
     <meta property='og:image' content='{!! $p->image !!}'/>

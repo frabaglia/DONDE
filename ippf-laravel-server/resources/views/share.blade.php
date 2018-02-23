@@ -13,12 +13,11 @@
     <meta property='og:title' content='VAMOS'/>
     <meta property="og:description" ccontent="{{$p->establecimiento}} en {{$p->nombre_ciudad}}, {{$p->calle}} {{$p->altura}}  ">
     <meta property='og:url' content='https://vamoslac.org/share/{{$lang}}/{{$p->placeId}}'/>
-    <meta property='og:site_name' content="Vamos a ver que hace"/>
+    <meta property='og:site_name' content="Vamos"/>
     <meta property='og:type' content='website'/>
     <meta property='og:image' content='{!! $p->image !!}'/>
     <meta property='fb:app_id' content='288554014895839' />
     <meta name="twitter:card" content="summary">
-    <meta property="og:description" content="@lang('site.seo_meta_description_content')" />
     <meta name="twitter:description" content="{{$p->establecimiento}} en {{$p->nombre_ciudad}}, {{$p->calle}} {{$p->altura}}  ">
     <meta name='twitter:url' content='https://vamoslac.org/share/{{$lang}}/{{$p->placeId}} '/>
     <meta name='twitter:image' content='{!! $p->image !!}'/>

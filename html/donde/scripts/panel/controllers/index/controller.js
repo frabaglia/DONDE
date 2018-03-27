@@ -36,7 +36,7 @@ dondev2App.config(function($interpolateProvider, $locationProvider) {
                   $rootScope.totalEvals = response.total;
                   $rootScope.evaluations = response.data;
 
-          });                  
+          });
 
   $rootScope.exportEvalClick = "";
 
@@ -53,9 +53,9 @@ dondev2App.config(function($interpolateProvider, $locationProvider) {
     $rootScope.details = 'More details';
     $rootScope.delete = 'Delete';
     $rootScope.edit = 'Edit';
-    $rootScope.reject = 'Reject';    
+    $rootScope.reject = 'Reject';
   }
-  
+
 
     $rootScope.openExportEvalModal = function(){
       $('#exportEvalModal').openModal();
@@ -134,7 +134,7 @@ dondev2App.config(function($interpolateProvider, $locationProvider) {
     $scope.loadingPrev = true;
     $scope.loadingPost = true;
     $scope.loadingDep = true;
-    
+
     $scope.getFontSize = function(c){
       var size = 1;
       return {"font-size": size + "em"};
@@ -250,7 +250,7 @@ $rootScope.disableExportEvaluationButton = function(){
    if (typeof $rootScope.selectedCityEval === 'undefined'){
      idCiudad = null;
    }
-   else idCiudad = $rootScope.selectedCityEval.id;   
+   else idCiudad = $rootScope.selectedCityEval.id;
 
     var f = document.createElement("form");
     f.setAttribute('method',"post");
@@ -290,7 +290,7 @@ $rootScope.disableExportEvaluationButton = function(){
     f.appendChild(i2);
     f.appendChild(i3);
     f.appendChild(i4);
-    f.appendChild(lang);    
+    f.appendChild(lang);
     f.appendChild(s);
 
     document.getElementsByTagName('body')[0].appendChild(f);
@@ -440,7 +440,7 @@ $rootScope.getNowEval = function(){
   else{
     Materialize.toast("Debe seleccionar una ciudad" ,3000);
   }
-}  
+}
 
 
    $http.get('api/v2/panel/places/countersfilterbyuser')
@@ -495,7 +495,7 @@ $rootScope.searchQuery = "";
       }, function(data) {
         $scope.citiesEval = data;
         $rootScope.citiesEval = data;
-      })      
+      })
     }
   }
 
@@ -506,8 +506,8 @@ $rootScope.searchQuery = "";
   $rootScope.showProvince = function(){
 
     var flag =$(".tabs li a").last().hasClass('active');
-    
-    // From Actives 
+
+    // From Actives
     if(!flag){
       $rootScope.provinceOn= true;
       placesFactory.getProvincesForCountry($scope.selectedCountry.id,function(data){
@@ -532,14 +532,14 @@ $rootScope.searchQuery = "";
     $rootScope.partidoOn= true;
     placesFactory.getPartidosForProvince($scope.selectedProvince.id,function(data){
       $rootScope.parties = data;
-    });      
+    });
   }
   // From Evaluations
   else{
     $rootScope.partidoEvalOn= true;
     placesFactory.getPartidosForProvince($scope.selectedProvinceEval.id,function(data){
       $rootScope.partiesEval = data;
-    });      
+    });
   }
 }
 
@@ -701,8 +701,8 @@ $rootScope.searchQuery = "";
                   $rootScope.evaluations = response.data;
                    $('#demoModalEval').closeModal();
 
-          });       
-           
+          });
+
 
           },
         function(response) {
@@ -711,9 +711,9 @@ $rootScope.searchQuery = "";
         });
 
       // Materialize.toast($rootScope.current.establecimiento + " ha sido rechazada.",4000);
-      
-       
-                   
+
+
+
     };
 
     $scope.closeModal= function(place){
@@ -750,6 +750,5 @@ $rootScope.searchQuery = "";
 
       return;
     }
-
 
 });

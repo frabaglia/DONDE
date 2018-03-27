@@ -1649,3 +1649,8 @@ div.list div.label {
 .no-info{
     color: #595959;
 }
+
+.form-checkbox-cards {
+    margin-top: 1rem;
+    text-align: left;
+}

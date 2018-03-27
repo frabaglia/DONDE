@@ -151,65 +151,27 @@
 
 
         <!-- CONDOMS CARD -->
-        <div class="card-panel">
+        <div class="form-checkbox-cards">
           <input  type="checkbox"
           name="place.condones"
           id="filled-in-box-condones"
           ng-checked="isChecked(place.condones)"
           ng-model="place.condones" ng-change="formChange()"/>
           <label for="filled-in-box-condones" translate="form_select_condones"></label>
-
-          <div class="form-group" ng-show="place.condones">
-            <div class="col s12">
-              <label translate="form_select_service_type_title"></label>
-            </div>
-            <p>
-              <input type="radio" id="st_condones1" name="servicetype_condones" value="arancel" ng-model="place.servicetype_condones" ng-change="formChange()">
-              <label for="st_condones1" translate="form_service_type_option_arancel"></label>
-            </p>
-            <p>
-              <input type="radio" id="st_condones2" name="servicetype_condones" value="gratuito" ng-model="place.servicetype_condones" ng-change="formChange()">
-              <label for="st_condones2" translate="form_service_type_option_gratuito"></label>
-            </p>
-            <p>
-              <input type="radio" id="st_condones3" name="servicetype_condones" value="cobertura" ng-model="place.servicetype_condones" ng-change="formChange()">
-              <label for="st_condones3" translate="form_service_type_option_consultar"></label>
-            </p>
-
-          </div>
         </div>
 
         <!-- VIH TEST CARD -->
-        <div class="card-panel">
+        <div class="form-checkbox-cards">
           <input  type="checkbox"
           name="place.prueba"
           id="filled-in-box-prueba"
           ng-checked="isChecked(place.prueba)"
           ng-model="place.prueba" ng-change="formChange()"/>
           <label for="filled-in-box-prueba" translate="form_prueba_option"></label>
-
-          <div class="form-group" ng-show="place.prueba">
-            <div class="col s12">
-              <label translate="form_select_service_type_title"></label>
-            </div>
-            <p>
-              <input type="radio" id="st_prueba1" name="servicetype_prueba" value="arancel" ng-model="place.servicetype_prueba" ng-change="formChange()">
-              <label for="st_prueba1" translate="form_service_type_option_arancel"></label>
-            </p>
-            <p>
-              <input type="radio" id="st_prueba2" name="servicetype_prueba" value="gratuito" ng-model="place.servicetype_prueba" ng-change="formChange()">
-              <label for="st_prueba2" translate="form_service_type_option_gratuito"></label>
-            </p>
-            <p>
-              <input type="radio" id="st_prueba3" name="servicetype_prueba" value="cobertura" ng-model="place.servicetype_prueba" ng-change="formChange()">
-              <label for="st_prueba3" translate="form_service_type_option_consultar"></label>
-            </p>
-
-          </div>
         </div>
 
         <!-- INFECTOLOGIA DETECTION CARD -->
-        <div class="card-panel">
+        <div class="form-checkbox-cards">
           <input  type="checkbox"
           name="place.infectologia"
           id="filled-in-box-infectologia"
@@ -220,34 +182,17 @@
         </div>
 
         <!-- SSR CARD -->
-        <div class="card-panel">
+        <div class="form-checkbox-cards">
           <input  type="checkbox"
           name="place.ssr"
           id="filled-in-box-ssr"
           ng-checked="isChecked(place.ssr)"
           ng-model="place.ssr" ng-change="formChange()"/>
           <label for="filled-in-box-ssr" translate="form_ssr_option"></label>
-          <div class="form-group" ng-show="place.ssr">
-            <div class="col s12">
-              <label translate="form_select_service_type_title"></label>
-            </div>
-            <p>
-              <input type="radio" id="st_ssr1" name="servicetype_ssr" value="arancel" ng-model="place.servicetype_ssr" ng-change="formChange()">
-              <label for="st_ssr1" translate="form_service_type_option_arancel"></label>
-            </p>
-            <p>
-              <input type="radio" id="st_ssr2" name="servicetype_ssr" value="gratuito" ng-model="place.servicetype_ssr" ng-change="formChange()">
-              <label for="st_ssr2" translate="form_service_type_option_gratuito"></label>
-            </p>
-            <p>
-              <input type="radio" id="st_ssr3" name="servicetype_ssr" value="cobertura" ng-model="place.servicetype_ssr" ng-change="formChange()">
-              <label for="st_ssr3" translate="form_service_type_option_consultar"></label>
-            </p>
-          </div>
         </div>
 
         <!-- VACUNATORIO CARD -->
-        <div class="card-panel">
+        <div class="form-checkbox-cards">
           <input  type="checkbox"
           name="place.vacunatorio"
           id="filled-in-box-vacunatorio"
@@ -257,31 +202,13 @@
         </div>
 
         <!-- ILE CARD -->
-        <div class="card-panel">
+        <div class="form-checkbox-cards">
           <input  type="checkbox"
           name="place.ile"
           id="filled-in-box-ile"
           ng-checked="isChecked(place.ile)"
           ng-model="place.ile" ng-change="formChange()"/>
           <label for="filled-in-box-ile" translate="form_ile_option"></label>
-
-          <div class="form-group" ng-show="place.ile">
-            <div class="col s12">
-              <label translate="form_select_service_type_title"></label>
-            </div>
-            <p>
-              <input type="radio" id="st_ile1" name="servicetype_ile" value="arancel" ng-model="place.servicetype_ile" ng-change="formChange()">
-              <label for="st_ile1" translate="form_service_type_option_arancel"></label>
-            </p>
-            <p>
-              <input type="radio" id="st_ile2" name="servicetype_ile" value="gratuito" ng-model="place.servicetype_ile" ng-change="formChange()">
-              <label for="st_ile2" translate="form_service_type_option_gratuito"></label>
-            </p>
-            <p>
-              <input type="radio" id="st_ile3" name="servicetype_ile" value="cobertura" ng-model="place.servicetype_ile" ng-change="formChange()">
-              <label for="st_ile3" translate="form_service_type_option_consultar"></label>
-            </p>
-          </div>
         </div>
 
         <div class="row">

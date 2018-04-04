@@ -91,19 +91,29 @@ dondev2App.controller('formController', function(NgMap, vcRecaptchaService, plac
       (!$scope.aceptaTerminos) ||
       (typeof $scope.place.idPais === "undefined") ||
       (typeof $scope.place.idProvincia === "undefined") ||
-      (typeof $scope.place.idPartido === "undefined") ||
-      (typeof $scope.place.idCiudad === "undefined") ||
-      (!$scope.place.establecimiento || 0 === $scope.place.establecimiento.length));
+      //(typeof $scope.place.idPartido === "undefined") ||
+      //(typeof $scope.place.idCiudad === "undefined") ||
+      (!$scope.place.establecimiento || 0 === $scope.place.establecimiento.length) ||
+      (typeof $scope.place.tipo === "undefined")
+    );
     if (!flag) {
-      return (
-        ($scope.place.condones && (typeof $scope.place.servicetype_condones === "undefined" || $scope.place.servicetype_condones === null)) ||
-        ($scope.place.ile && (typeof $scope.place.servicetype_ile === "undefined" || $scope.place.servicetype_ile === null)) ||
-        ($scope.place.prueba && (typeof $scope.place.servicetype_prueba === "undefined" || $scope.place.servicetype_prueba === null)) ||
-        ($scope.place.mac && (typeof $scope.place.servicetype_mac === "undefined" || $scope.place.servicetype_mac === null)) ||
-        ($scope.place.ssr && (typeof $scope.place.servicetype_ssr === "undefined" || $scope.place.servicetype_ssr === null)) ||
-        ($scope.place.dc && (typeof $scope.place.servicetype_dc === "undefined" || $scope.place.servicetype_dc === null))
+      flag = (
+        !($scope.place.condones) &&
+        !($scope.place.ile) &&
+        !($scope.place.prueba) &&
+        !($scope.place.pruebaRapida) &&
+        !($scope.place.ssr) &&
+        !($scope.place.vacunatorio) &&
+        !($scope.place.infectologia)
       );
-    } else return true;
+    }
+    if (!flag) {
+        flag = (
+          !($scope.place.uploader_name) ||
+          (!($scope.place.uploader_tel) && !($scope.place.uploader_email))
+        );
+    }
+    return flag;
   }
 
 

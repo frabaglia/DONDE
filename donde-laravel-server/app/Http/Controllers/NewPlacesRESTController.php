@@ -37,20 +37,20 @@ class NewPlacesRESTController extends Controller
 
       $rules = array(
           'establecimiento' => 'required|max:150|min:2',
-          'idPartido' => 'required',
           'idPais' => 'required',
           'idProvincia' => 'required',
-          'idCiudad' => 'required',
-          'calle' => 'required',
+          //'idPartido' => 'required'
+          'tipo' => 'required',
           'uploader_name' => 'required',
-          'uploader_email' => 'required',
-          'uploader_tel' => 'required',
+          'uploader_email' => 'required_without:uploader_tel',
+          'uploader_tel' => 'required_without:uploader_email'
       );
 
-      $messages = array(
-          'required'    => 'El :attribute es requerido.',
-          'max'    => 'El :attribute debe poseer un maximo de :max caracteres.',
-        'min'    => 'El :attribute debe poseer un minimo de :min caracteres.');
+     $messages = array(
+         'required'     => 'El :attribute es requerido.',
+         'max'          => 'El :attribute debe poseer un maximo de :max caracteres.',
+         'min'          => 'El :attribute debe poseer un minimo de :min caracteres.'
+     );
 
       $validator = Validator::make($request_params,$rules,$messages);
       $params = $request_params;

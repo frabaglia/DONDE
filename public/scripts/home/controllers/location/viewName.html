@@ -1,0 +1,46 @@
+<div class="home full new-home " style="min-height: 64vh;">
+
+    <div class="col s12">
+
+        <a style="font-size: 22px; pointer-events:none;"><span translate="search"></span>
+        <span translate="[[ service.title | translate ]]"></span></a>
+
+        <div class="card-panel hoverable">
+
+            <h4 translate="busqueda_name_titulo"> </h4>
+
+            <input ng-attr-placeholder="[['parameter'|translate]]" id="members" ng-model="name">
+
+            <a ng-click="setReturn(3)" ng-href="#/buscar/[[service.code]]/[[name]]/listado" class="waves-effect waves-light btn wow" ng-class="{'disabled': !name || name.length < 3}" translate="search">
+            <i class="mdi-navigation-chevron-right right"></i>
+            <i class="mdi-editor-format-list-bulleted left"></i></a>
+
+        </div>
+
+    </div>
+
+    <div class="col s12" ng-show="">
+
+        <div class="card-panel hoverable">
+
+            <h4 translate="not_found_result_label"> </h4>
+
+            <a ng-href="#/sugerir" class="waves-effect waves-light btn wow" translate="suggest">
+            <i class="mdi-navigation-chevron-right right"></i>
+            <i class="mdi-editor-format-list-bulleted left"></i></a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row home-footer-wrapper">
+
+    <footer class="result-service-footer">
+
+        <p translate="footer_text"></p>
+
+    </footer>
+
+</div>

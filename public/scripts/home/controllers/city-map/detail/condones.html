@@ -1,0 +1,35 @@
+<div class="collapsible-header service-header row" ng-class="{ active : serviceCode == 'condones' ||  currentMarker.serviceCode == 'resume'}">
+  <h4 class="service-header-text col s11 l11">
+     <img class="home-icon-responsive" ng-show="currentMarker.friendly_condones" src="images/condones_friendly.svg">
+     <img ng-show="!(currentMarker.friendly_condones)" alt="Este lugar distribuye condones" src="images/condones.svg">
+     <span translate="condones_name"></span>
+  </h4>
+  <i class="mdi-hardware-keyboard-arrow-down col s1 l1"></i>
+</div>
+<div class="collapsible-body">
+   <div class="col s12 m12" ng-cloak ng-show="currentMarker.servicetype_condones != ''">
+        <span translate="form_select_service_type_title"></span>&nbsp;[[currentMarker.servicetype_condones]]
+    </div>
+
+    <div class="col s12 m12" ng-cloak ng-show="currentMarker.comentarios_distrib">
+       <i class="mdi-action-info tiny"></i>[[currentMarker.comentarios_distrib]]
+    </div>
+
+    <div class="col s12 m12 " ng-cloak ng-show="currentMarker.horario_distrib"><i class="mdi-action-query-builder tiny"> </i>[[currentMarker.horario_distrib]]</div>
+    <div class="col s12 m12" ng-cloak ng-show="currentMarker.responsable_distrib"><i class="mdi-action-face-unlock tiny"> </i>[[currentMarker.responsable_distrib]]</div>
+    <div class="col s12 m12" ng-cloak ng-show="currentMarker.mail_distrib">
+        <a ng-href="mailto:[[currentMarker.mail_distrib]]" target="_blank">
+            <i class="mdi-communication-message tiny"></i> [[currentMarker.mail_distrib]]
+        </a>
+    </div>
+    <div class="col s12 m12 truncate" ng-cloak ng-show="currentMarker.web_distrib">
+        <a ng-href="[[currentMarker.web_distrib]]" target="_blank">
+            <i class="mdi-action-language tiny"></i> [[currentMarker.web_distrib]]
+        </a>
+    </div>
+
+    <div class="col s12 m12 telefono">
+        <a target="_blank" ng-cloak ng-show="currentMarker.tel_distrib" ng-href="tel:[[currentMarker.tel_distrib]]" class="tel"><i class="mdi-communication-call tiny"></i>
+            [[currentMarker.tel_distrib]]</a>
+    </div>
+</div>

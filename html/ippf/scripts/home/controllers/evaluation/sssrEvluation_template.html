@@ -1,0 +1,171 @@
+<!-- ============================================================================================== -->
+<div class="block"><!-- start-block -->
+  <p class="blockTitle">¿Qué fuiste a buscar?</p>
+
+  <p class="blockContent">
+    <input  type="checkbox" name="evaluation.informacion" id="evaluation.informacion" ng-checked="isChecked(evaluation.informacion)" ng-model="evaluation.informacion" ng-change="formChange()"/>
+    <label for="evaluation.informacion">Información</label>
+  </p>
+
+  <p class="blockContent">
+    <input  type="checkbox"  name="evaluation.test" id="evaluation.test"  ng-checked="isChecked(evaluation.test)" ng-model="evaluation.test" ng-change="formChange()"/>
+    <label for="evaluation.test">Test de embarazo</label>
+  </p>
+
+  <p class="blockContent">
+    <input  type="checkbox" name="evaluation.pastillaA"  id="evaluation.pastillaA" ng-checked="isChecked(evaluation.pastillaA)" ng-model="evaluation.pastillaA" ng-change="formChange()"/>
+    <label for="evaluation.pastillaA">Pastillas anticonceptivas</label>
+  </p>
+  <p class="blockContent">
+    <input  type="checkbox" name="evaluation.pastillaDD"  id="evaluation.pastillaDD" ng-checked="isChecked(evaluation.pastillaDD)" ng-model="evaluation.pastillaDD" ng-change="formChange()"/>
+    <label for="evaluation.pastillaDD">Anticoncepción de emergencia (Pastilla del día después)</label>
+  </p>
+  <p class="blockContent">
+    <input  type="checkbox" name="evaluation.diu" id="evaluation.diu"id="evaluation.diu" ng-checked="isChecked(evaluation.diu)" ng-model="evaluation.diu" ng-change="formChange()"/>
+    <label for="evaluation.diu">DIU</label>
+  </p>
+  <p class="blockContent"><input  type="checkbox" name="evaluation.inyectable" id="evaluation.inyectable" ng-checked="isChecked(evaluation.inyectable)" ng-model="evaluation.inyectable" ng-change="formChange()"/>
+    <label for="evaluation.inyectable">Anticoncepción inyectable</label>
+  </p>
+  <p class="blockContent"><input  type="checkbox" name="evaluation.chip" id="evaluation.chip" ng-checked="isChecked(evaluation.chip)" ng-model="evaluation.chip" ng-change="formChange()"/>
+    <label for="evaluation.chip">Implante subdérmico (chip)</label>
+  </p>
+  <p class="blockContent"><input  type="checkbox" name="evaluation.condon" id="evaluation.condon" ng-checked="isChecked(evaluation.condon)" ng-model="evaluation.condon" ng-change="formChange()"/>
+    <label for="evaluation.condon">Preservativos</label>
+  </p>
+  <p class="blockContent"><input  type="checkbox" name="evaluation.ligadura" id="evaluation.ligadura" ng-checked="isChecked(evaluation.ligadura)" ng-model="evaluation.ligadura" ng-change="formChange()"/>
+    <label for="evaluation.ligadura">Ligadura de trompas</label>
+  </p>
+  <p class="blockContent"><input  type="checkbox" name="evaluation.vasectomia" id="evaluation.vasectomia" ng-checked="isChecked(evaluation.vasectomia)" ng-model="evaluation.vasectomia" ng-change="formChange()"/>
+    <label for="evaluation.vasectomia">Vasectomía</label>
+  </p>
+  <p class="blockContent"><input  type="checkbox" name="evaluation.otro" id="evaluation.otro" ng-checked="isChecked(evaluation.otro)" ng-model="evaluation.otro" ng-change="formChange()"/>
+    <label for="evaluation.otro">Otros (explicalo en Comentarios)</label>
+  </p>
+
+</div> <!-- del block -->
+<br>
+
+<!-- ============================================================================================== -->
+<!-- ============================================================================================== -->
+
+
+
+<!-- ============================================================================================== -->
+
+<!-- start-block -->
+<div class="block">
+  <p class="blockTitle">¿Te dieron lo que buscabas?</p>
+  <select class="blockContent browser-default right-alert" ng-model="evaluation.le_dieron" ng-change="formChange()">
+    <option value="" default selected>Selecciona una opción</option>
+    <option ng-repeat="ethnicity in searchOption" ng-value="ethnicity.value" ng-selected="ethnicity.value == evaluation.le_dieron">
+      [[ethnicity.label]]
+    </option>
+  </select>
+</div>
+
+<!-- ============================================================================================== -->
+<!-- start-block -->
+<div class="block">
+  <p class="blockTitle">¿Recibiste información clara, sencilla y completa?</p>
+  <div class="blockContent ">
+    <input ng-model="evaluation.info_ok" class="with-gap" name="group1" type="radio" id="privacidad_Si" value="1"  ng-change="formChange()"/>
+    <label for="privacidad_Si">Sí</label>
+    <input ng-model="evaluation.info_ok" class="with-gap" name="group1" type="radio" id="privacidad_No" value="0"  ng-change="formChange()"/>
+    <label for="privacidad_No">No</label>
+  </div>
+</div>
+
+<!-- del block -->
+<!-- ============================================================================================== -->
+
+<!-- start-block -->
+<div class="block">
+  <p class="blockTitle">¿Respetaron tu privacidad?</p>
+  <div class="blockContent ">
+    <input ng-model="evaluation.privacidad_ok" class="with-gap" name="group2" type="radio" id="Si" value="1"  ng-change="formChange()"/>
+    <label for="Si">Sí</label>
+    <input ng-model="evaluation.privacidad_ok" class="with-gap" name="group2" type="radio" id="No" value="0"  ng-change="formChange()"/>
+    <label for="No">No</label>
+  </div>
+</div>
+<!-- del block -->
+
+<!-- ============================================================================================== -->
+
+<div class="block"> <!-- start-block age -->
+  <p class="blockTitle">¿Cúal es tu edad?</p>
+  <div class="blockContent">
+    <input type="number" name="edad" value="" placeholder="Escribí en números" ng-model="evaluation.edad" class="validate" ng-change="formChange()"/>
+  </div>
+</div>
+
+<!-- ============================================================================================== -->
+
+<div class="block">
+  <p class="blockTitle">Género</p>
+  <select class="eight columns blockContent browser-default" ng-model="evaluation.genero" ng-change="formChange()">
+    <option value="" default selected>Selecciona una opción</option>
+    <option ng-repeat="genre in genreOptions" ng-value="genre.value" ng-selected="genre.value == evaluation.genero">
+      [[genre.label]]
+    </option>
+  </select>
+</div>
+
+<!-- ============================================================================================== -->
+
+<!-- start-block comments-->
+<div class="block">
+  <div>
+    <p class="blockTitle">Comentarios <span ng-if="comment.Comment.body.length >= 200" style="color: #e6642f;">Máximo alcanzado</span>  </p>
+  </div>
+<!-- <textarea id="comentario" type="text" name="comentario" placeholder="Máximo de 200 caracteres"
+class="blockContentComment" ng-model="evaluation.comentario" ng-change="formChange()" maxlength="5"></textarea>     -->
+<textarea
+ng-model="comment.Comment.body"
+name="comment[Comment][body]"
+maxlength="200"
+ng-change="formChange()"
+id="comentario"
+type="text"
+placeholder="Máximo de 200 caracteres"
+class="blockContentComment">
+</textarea>
+</div>
+
+
+<!-- ============================================================================================== -->
+
+<div class="block"> <!-- start-block Calification -->
+<p class="blockTitle">¿Como calificarías el lugar?</p>
+<div class="blockContent">
+<a style="cursor:pointer;" ng-repeat="icon in iconList" ng-click="setVote(icon.id)"><img src="images/emojis/[[icon.image]].png" alt="[[icon.image]]"></a>
+</div>
+</div>
+<!-- ============================================================================================== -->
+<div class="block"> <!-- start-block buttons -->
+<div
+vc-recaptcha
+theme="'light'"
+key="model.key"
+on-create="setWidgetId(widgetId)"
+on-success="setResponse(response)"
+on-expire="cbExpiration()"
+></div>
+</div>
+
+
+<div class="block"> <!-- start-block buttons -->
+<div class="blockButtons">
+<div class="col s7" style="padding-left: 0px !important; padding-right: 0px !important;">
+  <button ng-disabled="!submiteable" ng-click="clicky(evaluation)"  class="waves-effect waves-light btn blockSender">Enviar Calificación</button>
+</div>
+<div class="col s5">
+  <a href="javascript:history.back()" class="waves-effect waves-light btn blockSender" style="background-color: #9F9F9F;">Cancelar</a>
+</div>
+</div>
+</div>
+
+
+
+<!-- ============================================================================================== -->

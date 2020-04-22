@@ -1,0 +1,34 @@
+  <li class="collection-item" ng-show="currentMarker.infectologia">
+               
+                    <div class="row" >
+
+                        
+                    <h4>  <img alt="Este lugar cuenta con centro de infectologia"
+                        src="images/iconos-new_atencion-3.png" >Infectología </h4>
+    
+    
+
+      <div class="col s12 m12"  ng-cloak  ng-show="currentMarker.responsable_infectologia"><i class="mdi-action-face-unlock tiny"> </i>[[currentMarker.responsable_infectologia]]</div>
+    <div class="col s12 m12" ng-cloak ng-show="currentMarker.horario_infectologia"><i class="mdi-action-query-builder tiny"> </i>
+      [[currentMarker.horario_infectologia]]</div>
+    <div class="col s12 m12" ng-cloak ng-show="currentMarker.mail_infectologia">
+          <a ng-href="mailto:[[currentMarker.mail_infectologia]]" target="_blank">
+            <i class="mdi-communication-message tiny"></i>
+            [[currentMarker.mail_infectologia]]
+          </a>
+        </div>
+    
+    <div class="col s12 m12 truncate" ng-cloak ng-show="currentMarker.web_infectologia">
+          <a ng-href="[[currentMarker.web_infectologia]]" target="_blank">
+            <i class="mdi-action-language tiny"></i>
+            [[currentMarker.web_infectologia]]
+          </a>
+        </div>
+    
+     [[currentMarker.observaciones_infectologia]]
+     <div class="col s12 m12 telefono">
+            <a target="_blank" ng-cloak ng-show="currentMarker.tel_infectologia" ng-href="tel:[[currentMarker.tel_infectologia]]" class="tel"><i class="mdi-communication-call tiny"></i>
+                          [[currentMarker.tel_infectologia]]</a>
+    </div>
+  </div>
+  </li>

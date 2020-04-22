@@ -1,0 +1,30 @@
+<div class=''>
+<ul class="collection">
+    <!-- Header Tabble -->
+    <li class="collection-item collection-seo">
+      <div class="row valign">
+        <div class="row left-align">
+          <span class="distanceLanding"><b class="text-seo">[[nameCountry]] - [[nameProvince]]</b></span>
+        </div>
+      </div>
+    </li>
+    <li class="collection-item collection-seo">
+      <div class="row valign">
+        <div class="row left-align">
+          <i class="mdi-hardware-keyboard-arrow-down i-seo"></i> <span class="distanceLanding" translate="seo_select_district"><b></b></span>
+        </div>
+      </div>
+    </li>
+    <div class="palcesLanding">
+      <div class="container">
+        <table class="highlight left">
+          <tbody>
+            <tr ng-repeat='p in partidos'>
+              <td ><a class="item-seo" href="#/pais/[[idCountry]]-[[nameCountry]]/provincia/[[idProvince]]-[[nameProvince]]/partido/[[p.id]]-[[p.nombre_partido]]/ciudad">[[p.nombre_partido]]</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ul>
+  </div>

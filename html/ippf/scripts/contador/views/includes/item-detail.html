@@ -1,0 +1,8 @@
+<div ng-cloak ng-hide="currentitem.PCT_CLINTO">
+	<h5>  There is no data available for this precinct. Those that changed from 2012 to 2016 were dropped from the analysis.</h5>
+</div>
+<div ng-cloak ng-show="currentitem.PCT_CLINTO">
+	
+	<diverisity currentitem="currentitem" diversitychart="diversitychart" > </diverisity>
+	<votes currentitem="currentitem" diversitychart="diversitychart" > </votes>
+</div>

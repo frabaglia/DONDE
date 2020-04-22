@@ -1,0 +1,57 @@
+<div class="home full new-home">
+    <div class="container row wow fadeInRight" data-wow-delay="0s">
+        <div class="col s12 m3 hide-on-med-and-down">
+
+        </div>
+
+
+        <div class="col s12">
+             <p class="header Aligner-home" ng-cloak ng-show="service">
+                <img class="Aligner-item icon-landing" src="images/[[service.icon]]" alt="condones">
+                <a class="home-title Aligner-item" translate="[[ service.title | translate ]]"></span> </a>
+            </p>
+            <p class="header Aligner-home-content" ng-cloak ng-show="service" translate="[[service.desc]]"></p>
+            <!--p class="Aligner-home-extra" ng-cloak ng-show="service.code=='mac' || service.code=='ile'"><a href="[['web_url' | translate]]"><span  translate="web_url_label"></span></a> </p-->
+
+            <br>
+        <!-- SEGUNDO TIPO DE BUSQUEDA -->
+            <div class="card-panel hoverable">
+                <h4 translate="busqueda_geo_titulo"></h4>
+                <p translate="busqueda_geo_desc"><i class="mdi-action-info-outline tiny "></i> </p>
+                <div class="col s12 m3 hide-on-med-and-down"></div>
+                <a ng-href="#/localizar/[[service]]/listado" ng-click="setReturn(3)" class="waves-effect waves-light btn" data-wow-delay="0s">
+                    <i class="mdi-navigation-chevron-right right"></i>
+                    <i class="mdi-device-gps-fixed left"></i><span translate="busqueda_geo_button"></span></a>
+            </div>
+        </div>
+        <!-- PRIMER TIPO DE BUSQUEDA -->
+        <div class="col s12">
+            <div class="card-panel hoverable">
+                <h4 translate="busqueda_auto_titulo"></h4>
+                <p translate="busqueda_auto_desc"></p>
+                <a ng-href="#/como-buscas/[[service.code]]/sug" ng-click="setReturn(3)" class="waves-effect waves-light btn" data-wow-delay="0s">
+                    <i class="mdi-navigation-chevron-right right"></i>
+                    <i class="mdi-editor-format-list-bulleted left"></i><span translate="busqueda_auto_button"></span></a>
+                </a>
+            </div>
+        </div>
+        <!-- TERCER TIPO DE BUSQUEDA -->
+        <!--
+        <div class="col s12">
+            <div class="card-panel hoverable">
+                <h4>3) Seleccionar del listado</h4>
+                <p> Podrás elegir País, Provincia y Departamento</p>
+                <div class="col s12 m3 hide-on-med-and-down"></div>
+
+                <a  <a ng-href="#/como-buscas/[[service.code]]/ubicacion" ng-click="setReturn(3)" class="waves-effect waves-light btn" data-wow-delay="0s">
+                    <i class="mdi-navigation-chevron-right right"></i>
+                    <i class="mdi-editor-format-list-bulleted left"></i>Siguiente</a>
+            </div>
+        </div> -->
+    </div>
+</div>
+<div class="row home-footer-wrapper">
+    <footer class="landing-service-footer">
+        <p translate="footer_text"></p>
+    </footer>
+</div>

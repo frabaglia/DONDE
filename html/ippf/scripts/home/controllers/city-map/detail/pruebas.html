@@ -1,0 +1,52 @@
+<li class="collection-item" ng-show="currentMarker.prueba">
+
+  <div class="row">
+
+    <h4> <img ng-show="currentMarker.friendly_prueba" class="home-icon-responsive" src="images/vih_friendly.svg"> <img ng-show="!(currentMarker.friendly_prueba)" alt="Este lugar puede hacer prueba de HIV" src="images/vih.svg"> <span translate="prueba_name"></span> </h4>
+    
+    <div class="col s12 m12" ng-cloak ng-show="currentMarker.servicetype_prueba">
+        <span translate="form_select_service_type_title"></span>&nbsp;[[currentMarker.servicetype_prueba]]
+    </div>
+
+
+    <div class="col s12 m12" ng-cloak ng-show="currentMarker.observaciones_testeo">
+     <i class="mdi-action-info tiny"></i>[[currentMarker.observaciones_testeo]]
+    </div>
+    
+    <div class="col s12 m12 " ng-cloak ng-show="currentMarker.horario_testeo">
+        <i class="mdi-action-query-builder tiny"> </i>[[currentMarker.horario_testeo]]
+    </div>
+
+    <div class="col s12 m12" ng-cloak ng-show="currentMarker.mail_testeo">
+      <a ng-href="mailto:[[currentMarker.mail_testeo]]" target="_blank">
+        <i class="mdi-communication-message tiny"></i> [[currentMarker.mail_testeo]]
+      </a>
+    </div>
+
+    <div class="col s12 m12 truncate" ng-cloak ng-show="currentMarker.web_testeo">
+      <a ng-href="[[currentMarker.web_testeo]]" target="_blank">
+        <i class="mdi-action-language tiny"></i> [[currentMarker.web_testeo]]
+      </a>
+    </div>
+
+    <div class="col s12 m12 truncate" ng-cloak ng-show="currentMarker.responsable_testeo">
+        <i class="mdi-action-face-unlock tiny"></i> [[currentMarker.responsable_testeo]]
+    </div>
+
+
+    <div class="col s12 m12 telefono trap">
+      <a target="_blank" ng-cloak ng-show="currentMarker.tel_testeo" ng-href="tel:[[currentMarker.tel_testeo]]" class="tel">
+        <i class="mdi-communication-call tiny"> </i>
+        [[currentMarker.tel_testeo]]
+      </a>
+
+
+      <div ng-cloak ng-show="currentMarker.es_rapido" class="right-align">
+      <img  class="particularClock text-seo" alt="Este lugar cuenta con test rapido" src="images/iconos-test_rapido-3.svg">
+      <span class="particularClock" translate="fast_test"></span>
+      </div>
+    </div>
+
+  </div>
+
+</li>

@@ -1,0 +1,36 @@
+<li class="collection-item" ng-show="currentMarker.dc">
+  <div class="row">
+    <h4> <img ng-show="currentMarker.friendly_dc" class="home-icon-responsive" src="images/deteccion_friendly.svg"><img ng-show="!(currentMarker.friendly_dc)" alt="Este lugar cuenta con centro de servicios de detección de cancer"
+                        src="images/mac.svg"><span translate="dc_name"></span></h4>
+
+    <div class="col s12 m12" ng-cloak ng-show="currentMarker.servicetype_dc">
+      <span translate="form_select_service_type_title"> </span>&nbsp;[[currentMarker.servicetype_dc]]
+    </div>
+
+    <div class="col s12 m12" ng-cloak ng-show="currentMarker.comentarios_dc">
+       <i class="mdi-action-info tiny"></i>[[currentMarker.comentarios_dc]]
+    </div>
+
+    <div class="col s12 m12 " ng-cloak ng-show="currentMarker.horario_dc"><i class="mdi-action-query-builder tiny"> </i>[[currentMarker.horario_dc]]</div>
+    <div class="col s12 m12" ng-cloak ng-show="currentMarker.responsable_dc"><i class="mdi-action-face-unlock tiny"> </i>[[currentMarker.responsable_dc]]</div>
+    <div class="col s12 m12" ng-cloak ng-show="currentMarker.mail_dc">
+      <a ng-href="mailto:[[currentMarker.mail_dc]]" target="_blank">
+            <i class="mdi-communication-message tiny"></i>
+            [[currentMarker.mail_dc]]
+          </a>
+    </div>
+    <div class="col s12 m12 truncate" ng-cloak ng-show="currentMarker.web_dc">
+      <a ng-href="[[currentMarker.web_dc]]" target="_blank">
+            <i class="mdi-action-language tiny"></i>
+            [[currentMarker.web_dc]]
+          </a>
+    </div>
+    <!-- [[currentMarker.observaciones_mac]] -->
+
+    <div class="col s12 m12 telefono">
+      <a target="_blank" ng-cloak ng-show="currentMarker.tel_dc" ng-href="tel:[[currentMarker.tel_dc]]" class="tel"><i class="mdi-communication-call tiny"></i>
+                                            [[currentMarker.tel_dc]]</a>
+    </div>
+
+  </div>
+</li>

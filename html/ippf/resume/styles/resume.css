@@ -1,0 +1,147 @@
+div.resume h5{
+  padding-top: 20px;
+}
+div.resume h3{
+  padding-top: 20px;
+}
+div.row.highlight{
+   border:solid 3px ;
+   border-color: #e6334c;
+  border-top: double 3px;
+  border-top-color: #e6334c !important;
+  padding: 1em;
+}
+
+.fa-check-square-o{
+  font-size: 1em !important;
+}
+
+.region-detail {
+    margin-top: 1em;
+    border: solid 2px;
+    border-color:  #D3D3D3;
+    padding: 2em;
+}
+.region-detail .action {
+  border: solid 2px;
+  border-color:  #D3D3D3;
+  /*padding: 1em;*/
+  font-size: 0.9em;
+  padding: 0;
+}
+
+.region-detail .action {
+   font-size: 0.9em;
+
+}
+.region-detail img{
+  max-width: 100px;
+}
+.progress{
+
+    position: relative;
+    height: 15px;
+    background-color: #D3D3D3;
+}
+.progress-bar {
+    background-color: #e6334c;
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    -webkit-transition: width .6s ease;
+    -o-transition: width .6s ease;
+    transition: width .6s ease;
+}
+
+.row.head{
+  padding-top: 3em;
+  padding-bottom: 3em;
+}
+.action p {
+    padding: 0;
+    margin: 0;
+}
+.row.s6{
+    padding: 0;
+    margin: 0;
+}
+
+svg path,svg polygon { transition: fill 1s ease; }
+svg path,svg polygon { transition: fill-opacity 1s ease; }
+svg path{
+  fill:white;
+
+}
+svg path.active {
+  fill:#e6334c;
+  fill-opacity:0;
+  cursor: pointer;
+}
+path.st1.highlight {
+    stroke: #000000;
+    stroke-width: 1.6;
+}
+
+div.share {
+    padding: 1.5em;
+    padding-bottom: 2.2em;
+}
+
+.btn-floating.btn-large i {
+    line-height: 56px;
+    background: #e6334c;
+}
+.odometer.odometer-auto-theme, .odometer.odometer-theme-minimal{
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+.resume .detail {
+     padding: 0px; 
+   
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.resume {
+  overflow-x: hidden;
+}
+
+.resume  .container .row {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.resume p{
+  margin:0;
+  padding:0;
+}
+
+.orange-c{
+  color:#e6642f;
+}
+
+strong {
+    font-weight: 800;
+}
+
+.container.close{
+     padding-top: 20px; 
+}
+
+.container.list{
+  padding: 0;
+  margin:0;
+}
+
+.container.list h3{
+  padding-top:0;
+}
+
+
+

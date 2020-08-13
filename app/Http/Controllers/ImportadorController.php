@@ -88,7 +88,6 @@ class ImportadorController extends Controller {
 
 	function replaceArrayKey($array, $oldKey, $newKey){
 		if(!array_key_exists($oldKey,$array)) return $array;
-		if(array_key_exists($newKey,$array)) return $array;
 		$array[$newKey] = $array[$oldKey];
 		unset($array[$oldKey]);
 		return $array;

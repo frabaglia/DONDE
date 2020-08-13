@@ -433,10 +433,12 @@ dondev2App.controller('panelIndexController', function(NgMap,copyService, places
       }
     }
     if(valor == null){
-      valor = 'null';
+      valor = '-1';
     }
 
     var getNowEvalUrl = 'api/v2/evaluation/getallBy';
+
+    getNowEvalUrl += '/' + valor;
 
     if( $scope.selectedCountryEval){
       getNowEvalUrl += '/' +   $scope.selectedCountryEval.id ;
@@ -460,7 +462,7 @@ dondev2App.controller('panelIndexController', function(NgMap,copyService, places
       }
       else{
         for(var i=0; i<ev.length; i++){
-          if(ev[i].aprobado == valor){
+          if(ev[i].aprobadoEval == valor){
             evShow.push(ev[i]);
           }
         }

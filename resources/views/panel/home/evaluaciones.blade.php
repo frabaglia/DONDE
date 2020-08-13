@@ -186,9 +186,9 @@
               <td class="actions col s1">
                 <a ng-cloak target="_blank" ng-href="panel/places/[[e.idPlace]]" data-toggle="tooltip" title="[['edit'|translate]]" class="waves-effect waves-light btn-floating orange"><i class="mdi-content-create left"></i>
                 </a>
-                <a ng-show="e.aprobado == 1" ng-click="removeNow(e.id)" data-toggle="tooltip" title="[['reject'|translate]]" class="waves-effect waves-light btn-floating red"><i class="mdi-av-not-interested left"></i>
+                <a ng-show="e.aprobadoEval == 1" ng-click="removeNow(e.id)" data-toggle="tooltip" title="[['reject'|translate]]" class="waves-effect waves-light btn-floating red"><i class="mdi-av-not-interested left"></i>
                 </a>
-                <a ng-show="e.aprobado == 1" ng-click="openReplyForm(e)"  href="#reply-modal" title="[['reply'|translate]]" modal open="openModal" ng-class="{'green': e.reply_content}" class="waves-effect waves-light btn-floating green">
+                <a ng-show="e.aprobadoEval == 1" ng-click="openReplyForm(e)"  href="#reply-modal" title="[['reply'|translate]]" modal open="openModal" ng-class="{'green': e.reply_content}" class="waves-effect waves-light btn-floating green">
                   <i class="mdi-content-reply left"></i>
                 </a>
               </td>

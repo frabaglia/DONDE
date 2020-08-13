@@ -392,7 +392,7 @@ class ImportadorController extends Controller {
 		$idCiudad = $request_params['idCiudad'];
 		$aprob = $request_params['aprob'];
 		$evalController = new EvaluationRESTController;
-		$evaluations = $evalController->getAllByCity($idPais,$idProvincia,$idPartido,$idCiudad,$aprob);
+		$evaluations = $evalController->getAllByCity($aprob,$idPais,$idProvincia,$idPartido,$idCiudad);
 		
 		if (sizeof($evaluations) > 0){
 			$sufix = '';

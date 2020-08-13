@@ -515,11 +515,11 @@ class EvaluationRESTController extends Controller {
 		}
 	}
 	
-	public function getAllByCity($paisId = null, $pciaId = null, $partyId = null, $cityId = null, $aprobado = '-1'){
+	public function getAllByCity($aprobado = '-1', $paisId = null, $pciaId = null, $partyId = null, $cityId = null){
 
 		$q = DB::table('evaluation');
 		
-		if ($aprobado !== '-1'){
+		if ($aprobado == '0' || $aprobado == '1'){
 			$q->where('evaluation.aprobado', '=', $aprobado);
 		}
 		

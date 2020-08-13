@@ -68,7 +68,7 @@ Route::group(['middleware' => \App\Http\Middleware\CheckLang::class], function (
     Route::get('api/v2/provincia/getall', 'PlacesRESTController@getAllProvincias');
     Route::get('api/v2/partido/getall', 'PlacesRESTController@getAllPartidos');
     Route::get('api/v2/evaluation/getall', 'EvaluationRESTController@getAllEvaluations');
-    Route::get('api/v2/evaluation/getallBy/{paisId?}/{pciaId?}/{partyId?}/{cityId?}', 'EvaluationRESTController@getAllByCity');
+    Route::get('api/v2/evaluation/getallBy/{aprobado?}/{paisId?}/{pciaId?}/{partyId?}/{cityId?}', 'EvaluationRESTController@getAllByCity');
     Route::get('api/v2/evaluation/{id}', 'EvaluationRESTController@removeEvaluation');
 });
 
